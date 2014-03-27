@@ -1,4 +1,3 @@
-
 package algorithms;
 
 import java.util.List;
@@ -12,7 +11,8 @@ import datastructures.*;
 public class GaussSeidelMethod {
 
 	public MySparseVector solve(MySparseMatrix a, MySparseVector b, MySparseVector x0) {
-		// TODO ellenorizzuk, h szigoruan diagonalisan dominans-e, es ha nem, dobjunk egy baszott nagy exception-t
+		// TODO ellenorizzuk, h szigoruan diagonalisan dominans-e, es ha nem,
+		// dobjunk egy baszott nagy exception-t
 		List<MatrixItem> m = a.getData();
 		MySparseVector x = x0.clone();
 		int i = 0;
