@@ -32,19 +32,19 @@ public class GaussSeidelMethod {
 		double diag = 0;
 		double value = 0;
 		for (MatrixItem i : m) {
-			if (i.getI() != row) {
+			if (i.getRow() != row) {
 				value = (b.getValue(row) - rowsum) * (1 / diag);
 				xnew.setValue(row, value);
-				row = i.getI();
+				row = i.getRow();
 				rowsum = 0;
 			}
 
-			if (i.getJ() == row)
+			if (i.getCol() == row)
 				diag = i.getValue();
-			else if (i.getJ() > row)
-				rowsum += i.getValue() * x.getValue(i.getJ());
+			else if (i.getCol() > row)
+				rowsum += i.getValue() * x.getValue(i.getCol());
 			else
-				rowsum += i.getValue() * xnew.getValue(i.getJ());
+				rowsum += i.getValue() * xnew.getValue(i.getCol());
 		}
 		value = (b.getValue(row) - rowsum) * (1 / diag);
 		xnew.setValue(row, value);

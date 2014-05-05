@@ -26,7 +26,7 @@ public class MySparseMatrix {
 	public List<MatrixItem> getData() {
 		List<MatrixItem> x = new ArrayList<MatrixItem>();
 		for (MatrixItem i : data) {
-			x.add(new MatrixItem(i.getI(), i.getJ(), i.getValue()));
+			x.add(new MatrixItem(i.getRow(), i.getCol(), i.getValue()));
 		}
 		return x;
 	}
@@ -35,22 +35,33 @@ public class MySparseMatrix {
 		return size;
 	}
 
-	public double getValue(int row, int col) {
-		checkIndex(row);
-		checkIndex(col);
+	private Magick getRowObject(int row) {
 		for (int i = 0; i < rowindex.size(); ++i) {
 			Magick m = rowindex.get(i);
 			if (m.getRow() == row) {
-				for (int j = m.getIndex(); j < data.size(); ++j) {
-					MatrixItem b = data.get(j);
-					if (b.getJ() == col)
-						return b.getValue();
-					else if (b.getJ() > col || b.getI() > row)
-						return 0;
-				}
-			} else if (m.getRow() > row)
-				return 0;
+				return m;
+			} else if (m.getRow() > row) {
+				return null;
+			}
 		}
+		return null;
+	}
+
+	public double getValue(int row, int col) {
+		checkIndex(row);
+		checkIndex(col);
+
+		Magick rowObject = getRowObject(row);
+		if (rowObject != null) {
+			for (int j = rowObject.getIndex(); j < data.size(); ++j) {
+				MatrixItem b = data.get(j);
+				if (b.getCol() == col)
+					return b.getValue();
+				else if (b.getCol() > col || b.getRow() > row)
+					return 0;
+			}
+		}
+
 		return 0;
 	}
 
@@ -64,10 +75,10 @@ public class MySparseMatrix {
 			if (m.getRow() == row) {
 				for (int j = m.getIndex(); j < data.size(); ++j) {
 					MatrixItem b = data.get(j);
-					if (b.getJ() == col) {
+					if (b.getCol() == col) {
 						b.setValue(value);
 						return;
-					} else if (b.getJ() > col || b.getI() > row) {
+					} else if (b.getCol() > col || b.getRow() > row) {
 						data.add(j, new MatrixItem(row, col, value));
 						for (int k = i + 1; k < rowindex.size(); ++k)
 							rowindex.get(k).increaseIndex();
@@ -107,7 +118,7 @@ public class MySparseMatrix {
 			} else if (rowindex.get(k).getRow() == i) {
 				int l = rowindex.get(k).getIndex();
 				for (int j = 0; j < size; ++j) {
-					if (l < data.size() && j == data.get(l).getJ()) {
+					if (l < data.size() && j == data.get(l).getCol()) {
 						matrix += data.get(l).getValue() + " ";
 						++l;
 					} else
@@ -125,32 +136,47 @@ public class MySparseMatrix {
 			throw new IndexOutOfBoundsException();
 	}
 
-	public boolean IsDiagonalDominant() {
-		boolean l = true;
+	public boolean isDiagonalDominant() {
+		boolean diagonalDominant = true;
 		int row = 0;
 		double rowsum = 0;
 		double diag = 0;
 		MatrixItem mi;
 
-		for (int i = 0; i < data.size() && l; ++i) {
+		for (int i = 0; i < data.size() && diagonalDominant; ++i) {
 			mi = data.get(i);
-			if (mi.getI() != row) {
+			if (mi.getRow() != row) {
 				if (rowsum > diag) {
-					l = false;
+					diagonalDominant = false;
 				}
-				row = mi.getI();
+				row = mi.getRow();
 				rowsum = 0;
 				diag = 0;
 			} else {
-				if (mi.getJ() == row)
+				if (mi.getCol() == row) {
 					diag = Math.abs(mi.getValue());
-				else
+				} else {
 					rowsum += Math.abs(mi.getValue());
+				}
 			}
 		}
 		if (rowsum > diag) {
-			l = false;
+			diagonalDominant = false;
 		}
-		return l;
+		return diagonalDominant;
+	}
+
+	public boolean isSymmetryc() {
+		boolean symetric = true;
+		for (int i = 0; i < data.size() && symetric; ++i) {
+			MatrixItem item = data.get(i);
+			if (item.getRow() < size / 2) {
+				Magick rowObject = getRowObject(item.getCol());
+				if (rowObject != null) {
+
+				}
+			}
+		}
+		return symetric;
 	}
 }

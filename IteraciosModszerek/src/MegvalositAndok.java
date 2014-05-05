@@ -13,18 +13,18 @@ public class MegvalositAndok {
 		int n = x.getSize();
 		MySparseVector r = new MySparseVector(n);
 		List<MatrixItem> m = A.getData();
-		int row = m.get(0).getI();
+		int row = m.get(0).getRow();
 		double rowsum = 0;
 		double value = 0;
 		for (MatrixItem i : m) {
-			if (i.getI() != row) {
+			if (i.getRow() != row) {
 				value = b.getValue(row) - rowsum;
 				r.setValue(row, value);
-				row = i.getI();
+				row = i.getRow();
 				rowsum = 0;
 			}
 
-			rowsum += i.getValue() * x.getValue(i.getJ());
+			rowsum += i.getValue() * x.getValue(i.getCol());
 		}
 		value = b.getValue(row) - rowsum;
 		r.setValue(row, value);

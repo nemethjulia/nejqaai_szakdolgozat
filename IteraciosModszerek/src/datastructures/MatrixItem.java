@@ -10,24 +10,24 @@ package datastructures;
  */
 public class MatrixItem {
 
-	private int i;
-	private int j;
+	private int row;
+	private int col;
 	private double value;
 
-	public int getI() {
-		return i;
+	public int getRow() {
+		return row;
 	}
 
-	public void setI(int i) {
-		this.i = i;
+	public void setRow(int i) {
+		this.row = i;
 	}
 
-	public int getJ() {
-		return j;
+	public int getCol() {
+		return col;
 	}
 
-	public void setJ(int j) {
-		this.j = j;
+	public void setCol(int j) {
+		this.col = j;
 	}
 
 	public double getValue() {
@@ -39,8 +39,8 @@ public class MatrixItem {
 	}
 
 	public MatrixItem(int i, int j, double value) {
-		this.i = i;
-		this.j = j;
+		this.row = i;
+		this.col = j;
 
 		this.value = value;
 	}

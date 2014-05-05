@@ -32,17 +32,17 @@ public class JacobiMethod {
 		double diag = 0;
 		double value = 0;
 		for (MatrixItem i : m) {
-			if (i.getI() != row) {
+			if (i.getRow() != row) {
 				value = (b.getValue(row) - rowsum) * (1 / diag);
 				xnew.setValue(row, value);
-				row = i.getI();
+				row = i.getRow();
 				rowsum = 0;
 			}
 
-			if (i.getJ() == row)
+			if (i.getCol() == row)
 				diag = i.getValue();
 			else
-				rowsum += i.getValue() * x.getValue(i.getJ());
+				rowsum += i.getValue() * x.getValue(i.getCol());
 		}
 		value = (b.getValue(row) - rowsum) * (1 / diag);
 		xnew.setValue(row, value);

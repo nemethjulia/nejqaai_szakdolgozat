@@ -38,13 +38,13 @@ public class GradientMethod {
 		MySparseVector rk = new MySparseVector(n);
 
 		for (MatrixItem i : m) {
-			if (i.getI() != row) {
+			if (i.getRow() != row) {
 				value = b.getValue(row) - rowsum;
 				rk.setValue(row, value);
-				row = i.getI();
+				row = i.getRow();
 				rowsum = 0;
 			} else
-				rowsum += i.getValue() * x.getValue(i.getJ());
+				rowsum += i.getValue() * x.getValue(i.getCol());
 		}
 		value = b.getValue(row) - rowsum;
 		rk.setValue(row, value);
@@ -71,12 +71,12 @@ public class GradientMethod {
 		MySparseVector current = new MySparseVector(n);
 
 		for (MatrixItem i : m) {
-			if (i.getI() != row) {
+			if (i.getRow() != row) {
 				current.setValue(row, rowsum);
-				row = i.getI();
+				row = i.getRow();
 				rowsum = 0;
 			} else
-				rowsum += i.getValue() * rk.getValue(i.getJ());
+				rowsum += i.getValue() * rk.getValue(i.getCol());
 		}
 		current.setValue(row, rowsum);
 
