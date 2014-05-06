@@ -47,6 +47,18 @@ public class MySparseMatrix {
 		return null;
 	}
 
+	private MatrixItem getItemInRow(int colIndex, Magick rowObject) {
+		for (int i = rowObject.getIndex(); i < data.size(); ++i) {
+			MatrixItem item = data.get(i);
+			if (item.getCol() == colIndex) {
+				return item;
+			} else if (item.getCol() > colIndex) {
+				return new MatrixItem(rowObject.getRow(), colIndex, 0);
+			}
+		}
+		return new MatrixItem(rowObject.getRow(), colIndex, 0);
+	}
+
 	public double getValue(int row, int col) {
 		checkIndex(row);
 		checkIndex(col);
@@ -170,10 +182,15 @@ public class MySparseMatrix {
 		boolean symetric = true;
 		for (int i = 0; i < data.size() && symetric; ++i) {
 			MatrixItem item = data.get(i);
-			if (item.getRow() < size / 2) {
+			if (item.getCol() > item.getRow() / 2) {
 				Magick rowObject = getRowObject(item.getCol());
 				if (rowObject != null) {
-
+					MatrixItem compare = getItemInRow(item.getRow(), rowObject);
+					if (compare.getValue() != item.getValue()) {
+						symetric = false;
+					}
+				} else {
+					symetric = false;
 				}
 			}
 		}
