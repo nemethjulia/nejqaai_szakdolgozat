@@ -1,11 +1,9 @@
+package datastructures;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-
-import datastructures.MatrixItem;
-import datastructures.MySparseMatrix;
-import datastructures.MySparseVector;
 
 public class MegvalositAndok {
 
@@ -55,6 +53,7 @@ public class MegvalositAndok {
 					} else {
 						return vector;
 					}
+					line = reader.readLine();
 				}
 			}
 		} catch (NumberFormatException e) {
@@ -88,8 +87,8 @@ public class MegvalositAndok {
 					} else {
 						return matrix;
 					}
+					line = reader.readLine();
 				}
-				line = reader.readLine();
 			}
 		} catch (NumberFormatException e) {
 			return null;
