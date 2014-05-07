@@ -7,4 +7,8 @@ public class IsNotPositiveDefinite extends Exception {
 	 */
 	private static final long serialVersionUID = -524834372818080906L;
 
+	public IsNotPositiveDefinite(String string) {
+		super(string);
+	}
+
 }

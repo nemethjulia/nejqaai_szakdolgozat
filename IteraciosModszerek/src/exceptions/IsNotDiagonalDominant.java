@@ -7,4 +7,8 @@ public class IsNotDiagonalDominant extends Exception {
 	 */
 	private static final long serialVersionUID = 347546743226859968L;
 
+	public IsNotDiagonalDominant(String string) {
+		super(string);
+	}
+
 }
