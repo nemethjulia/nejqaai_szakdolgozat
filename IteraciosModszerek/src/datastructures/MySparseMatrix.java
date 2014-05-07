@@ -130,8 +130,9 @@ public class MySparseMatrix {
 			} else if (rowindex.get(k).getRow() == i) {
 				int l = rowindex.get(k).getIndex();
 				for (int j = 0; j < size; ++j) {
-					if (l < data.size() && j == data.get(l).getCol()) {
-						matrix += data.get(l).getValue() + " ";
+					MatrixItem item = data.get(l);
+					if (l < data.size() && j == item.getCol() && k == item.getRow()) {
+						matrix += item.getValue() + " ";
 						++l;
 					} else
 						matrix += "0 ";
@@ -152,18 +153,34 @@ public class MySparseMatrix {
 		boolean diagonalDominant = true;
 		int row = 0;
 		double rowsum = 0;
+		double oldRowsum = 0;
 		double diag = 0;
+		double oldDiag = 1;
 		MatrixItem mi;
 
 		for (int i = 0; i < data.size() && diagonalDominant; ++i) {
 			mi = data.get(i);
 			if (mi.getRow() != row) {
-				if (rowsum > diag) {
-					diagonalDominant = false;
+				if (row + 1 != mi.getRow()) {
+					diagonalDominant = false; // ha egy sorban nincs érték, akkor a diagonális 0, így nem > mint a többi
+				} else {
+					if (oldRowsum >= oldDiag) { // azért >= és nem >, hogy szigorú legyen
+						diagonalDominant = false;
+					} else {
+						oldRowsum = rowsum;
+						oldDiag = diag;
+						row = mi.getRow();
+						rowsum = 0;
+						diag = 0;
+
+						if (mi.getCol() == row) {
+							diag = Math.abs(mi.getValue());
+						} else {
+							rowsum += Math.abs(mi.getValue());
+						}
+
+					}
 				}
-				row = mi.getRow();
-				rowsum = 0;
-				diag = 0;
 			} else {
 				if (mi.getCol() == row) {
 					diag = Math.abs(mi.getValue());
@@ -172,7 +189,7 @@ public class MySparseMatrix {
 				}
 			}
 		}
-		if (rowsum > diag) {
+		if (oldRowsum >= oldDiag) {
 			diagonalDominant = false;
 		}
 		return diagonalDominant;

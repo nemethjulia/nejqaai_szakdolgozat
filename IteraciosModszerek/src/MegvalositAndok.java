@@ -89,6 +89,7 @@ public class MegvalositAndok {
 						return matrix;
 					}
 				}
+				line = reader.readLine();
 			}
 		} catch (NumberFormatException e) {
 			return null;

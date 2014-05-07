@@ -48,6 +48,16 @@ public class TestMySparseMatrix {
 	}
 
 	@Test
+	public void testToString() {
+		MySparseMatrix m = new MySparseMatrix(10);
+		m.setValue(5, 5, 1);
+
+		String expected = "0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 1.0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n";
+
+		Assert.assertEquals(expected, m.toString());
+	}
+
+	@Test
 	public void testIsSymmmetric() {
 		MySparseMatrix m = new MySparseMatrix(10);
 		m.setValue(5, 5, 1);
@@ -63,13 +73,20 @@ public class TestMySparseMatrix {
 	}
 
 	@Test
-	public void testToString() {
+	public void testIsDiagonalDominant() {
 		MySparseMatrix m = new MySparseMatrix(10);
-		m.setValue(5, 5, 1);
+		for (int i = 0; i < m.getSize(); ++i) {
+			m.setValue(i, i, 1);
+		}
+		Assert.assertTrue(m.isDiagonalDominant());
 
-		String expected = "0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 1.0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n0 0 0 0 0 0 0 0 0 0 \n";
+		m.setValue(1, 5, 2);
+		m.setValue(5, 1, 2);
+		Assert.assertFalse(m.isDiagonalDominant());
 
-		Assert.assertEquals(expected, m.toString());
+		m.setValue(1, 1, 3);
+		m.setValue(5, 5, 3);
+		Assert.assertTrue(m.isDiagonalDominant());
 	}
 
 }
