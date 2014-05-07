@@ -2,28 +2,22 @@ package algorithms;
 
 import java.util.List;
 
-import datastructures.*;
+import datastructures.MatrixItem;
+import datastructures.MySparseMatrix;
+import datastructures.MySparseVector;
+import exceptions.IsNotDiagonalDominant;
 
 /**
  * @author julcsi
  * 
  */
-public class GaussSeidelMethod {
+public class GaussSeidelMethod extends Method {
 
-	public MySparseVector solve(MySparseMatrix a, MySparseVector b, MySparseVector x0) {
-		// TODO ellenorizzuk, h szigoruan diagonalisan dominans-e, es ha nem,
-		// dobjunk egy baszott nagy exception-t
-		List<MatrixItem> m = a.getData();
-		MySparseVector x = x0.clone();
-		int i = 0;
-		while (i < 20) {
-			x = iterationStep(x, m, b);
-			++i;
-		}
-
-		return x;
+	public GaussSeidelMethod(int numberOfSteps) {
+		super(numberOfSteps);
 	}
 
+	@Override
 	public MySparseVector iterationStep(MySparseVector x, List<MatrixItem> m, MySparseVector b) {
 		int n = x.getSize();
 		MySparseVector xnew = new MySparseVector(n);
@@ -50,6 +44,13 @@ public class GaussSeidelMethod {
 		xnew.setValue(row, value);
 
 		return xnew;
+	}
+
+	@Override
+	protected void throwExceptions(MySparseMatrix a) throws IsNotDiagonalDominant {
+		if (!a.isDiagonalDominant()) {
+			throw new IsNotDiagonalDominant("Nem szigorúan diagonálisan domináns a mátrix!");
+		}
 	}
 
 }

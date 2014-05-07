@@ -1,6 +1,7 @@
 package algorithms;
 
-import datastructures.*;
+import datastructures.MySparseMatrix;
+import datastructures.MySparseVector;
 
 /**
  * @author julcsi
@@ -11,7 +12,7 @@ public class Test {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		MySparseVector b = new MySparseVector(3);
 		b.setValue(0, 3);
 		b.setValue(1, -1);
@@ -21,7 +22,7 @@ public class Test {
 		a.setValue(0, 1, 2);
 		a.setValue(0, 2, 1);
 		a.setValue(1, 0, 2);
-		a.setValue(1, 1, 3);
+		a.setValue(1, 1, 4);
 		a.setValue(1, 2, 1);
 		a.setValue(2, 0, 1);
 		a.setValue(2, 1, 1);
@@ -33,10 +34,10 @@ public class Test {
 		x.setValue(1, 1);
 		x.setValue(2, 1);
 		System.out.println(x);
-		JacobiMethod j = new JacobiMethod();
+		JacobiMethod j = new JacobiMethod(30);
 		MySparseVector xn = j.solve(a, b, x);
 		System.out.println(xn);
-		GaussSeidelMethod gs = new GaussSeidelMethod();
+		GaussSeidelMethod gs = new GaussSeidelMethod(30);
 		xn = gs.solve(a, b, x);
 		System.out.println(xn);
 

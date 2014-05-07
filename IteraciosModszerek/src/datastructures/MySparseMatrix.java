@@ -250,4 +250,8 @@ public class MySparseMatrix {
 		}
 		return symetric;
 	}
+
+	public boolean isPositiveDefinite() {
+		return true;
+	}
 }
