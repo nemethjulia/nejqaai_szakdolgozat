@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import datastructures.MegvalositAndok;
 import datastructures.MySparseMatrix;
 import datastructures.MySparseVector;
 
@@ -32,16 +31,16 @@ public class TestRead {
 
 	@Test
 	public void testReadVector() {
-		MySparseVector vector = MegvalositAndok.olvassVectort("vector.txt");
-		System.out.println(vector);
+		MySparseVector vector = MySparseVector.readFromFile("src/test/vector.txt");
 		Assert.assertNotNull(vector);
+		Assert.assertEquals("[ 1.0 2.0 3.0 4.0 ]T", vector.toString());
 	}
 
 	@Test
 	public void testReadMatrix() {
-		MySparseMatrix matrix = MegvalositAndok.olvassMatrixot("matrix.txt");
-		System.out.println(matrix);
+		MySparseMatrix matrix = MySparseMatrix.readFromFile("src/test/matrix.txt");
 		Assert.assertNotNull(matrix);
+		Assert.assertEquals("4.0 0 0 0 \n0 4.0 0 0 \n0 0 4.0 3.0 \n0 0 3.0 4.0 \n", matrix.toString());
 	}
 
 }

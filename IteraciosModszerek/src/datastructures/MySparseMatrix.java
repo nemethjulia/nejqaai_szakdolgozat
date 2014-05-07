@@ -4,6 +4,9 @@
 
 package datastructures;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -147,6 +150,40 @@ public class MySparseMatrix {
 	private final void checkIndex(int index) {
 		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException();
+	}
+
+	public static MySparseMatrix readFromFile(String fileName) {
+		try {
+			return readFromFile(new BufferedReader(new FileReader(fileName)));
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	public static MySparseMatrix readFromFile(BufferedReader reader) {
+		MySparseMatrix matrix = null;
+
+		try {
+			String line = reader.readLine();
+			if (line != null) {
+				matrix = new MySparseMatrix(Integer.parseInt(line));
+				line = reader.readLine();
+				while (line != null) {
+					String[] arr = line.split(",");
+					if (arr.length == 3) {
+						matrix.setValue(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Double.parseDouble(arr[2]));
+					} else {
+						return matrix;
+					}
+					line = reader.readLine();
+				}
+			}
+		} catch (NumberFormatException e) {
+			return null;
+		} catch (IOException e) {
+			// do nothing
+		}
+		return matrix;
 	}
 
 	public boolean isDiagonalDominant() {

@@ -4,6 +4,9 @@
 
 package datastructures;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,6 +95,40 @@ public class MySparseVector {
 	private final void checkIndex(int index) {
 		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException();
+	}
+
+	public static MySparseVector readFromFile(String fileName) {
+		try {
+			return readFromFile(new BufferedReader(new FileReader(fileName)));
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	public static MySparseVector readFromFile(BufferedReader reader) {
+		MySparseVector vector = null;
+
+		try {
+			String line = reader.readLine();
+			if (line != null) {
+				vector = new MySparseVector(Integer.parseInt(line));
+				line = reader.readLine();
+				while (line != null) {
+					String[] arr = line.split(",");
+					if (arr.length == 2) {
+						vector.setValue(Integer.parseInt(arr[0]), Double.parseDouble(arr[1]));
+					} else {
+						return vector;
+					}
+					line = reader.readLine();
+				}
+			}
+		} catch (NumberFormatException e) {
+			return null;
+		} catch (IOException e) {
+			// do nothing
+		}
+		return vector;
 	}
 
 }
