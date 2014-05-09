@@ -23,7 +23,6 @@ public class GradientMethod extends Method {
 		if (!a.isSymmetryc()) {
 			throw new IsNotSymmetryc("Nem szimmetrikus a mátrix!");
 		}
-
 		if (!a.isPositiveDefinite()) {
 			throw new IsNotPositiveDefinite("Nem pozitív definit a mátrix!");
 		}

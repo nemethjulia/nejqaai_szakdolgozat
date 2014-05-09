@@ -6,7 +6,7 @@ import datastructures.MatrixItem;
 import datastructures.MySparseMatrix;
 import datastructures.MySparseVector;
 
-public class Method {
+public abstract class Method {
 
 	protected int numberOfSteps = 0;
 
@@ -29,11 +29,7 @@ public class Method {
 		return x;
 	}
 
-	public MySparseVector iterationStep(MySparseVector x, List<MatrixItem> m, MySparseVector b) {
-		throw new RuntimeException("This is an abstract class!");
-	}
+	public abstract MySparseVector iterationStep(MySparseVector x, List<MatrixItem> m, MySparseVector b);
 
-	protected void throwExceptions(MySparseMatrix a) throws Exception {
-		throw new RuntimeException("This is an abstract class!");
-	}
+	protected abstract void throwExceptions(MySparseMatrix a) throws Exception;
 }
