@@ -33,6 +33,21 @@ public class MyFrame extends JFrame {
 		JMenuItem mntmNewProcess = new JMenuItem("\u00DAj folyamat");
 		mnFile.add(mntmNewProcess);
 
+		JMenu mnImport = new JMenu("Bet\u00F6lt\u00E9s");
+		mnFile.add(mnImport);
+
+		JMenuItem mnEnteringValues = new JMenuItem("\u00C9rt\u00E9kek megad\u00E1s\u00E1val");
+		mnImport.add(mnEnteringValues);
+
+		JMenuItem mnFromFile = new JMenuItem("F\u00E1jlb\u00F3l");
+		mnImport.add(mnFromFile);
+
+		JMenu mnSave = new JMenu("Ment\u00E9s");
+		mnFile.add(mnSave);
+
+		JMenuItem mntmSaveToFile = new JMenuItem("Ment\u00E9s f\u00E1jlba");
+		mnSave.add(mntmSaveToFile);
+
 		JMenuItem mntmExit = new JMenuItem("Kil\u00E9p\u00E9s");
 		mntmExit.addActionListener(new ActionListener() {
 			@Override
@@ -42,26 +57,20 @@ public class MyFrame extends JFrame {
 		});
 		mnFile.add(mntmExit);
 
-		JMenu mnImport = new JMenu("Bet\u00F6lt\u00E9s");
-		menuBar.add(mnImport);
+		JMenu mnMethods = new JMenu("M\u00F3dszerek");
+		menuBar.add(mnMethods);
 
-		JMenu mnEnteringValues = new JMenu("\u00C9rt\u00E9kek megad\u00E1s\u00E1val");
-		mnImport.add(mnEnteringValues);
+		JMenuItem mnTryMethods = new JMenuItem("M\u00F3dszerek kipr\u00F3b\u00E1l\u00E1sa");
+		mnMethods.add(mnTryMethods);
 
-		JMenuItem mntmImportVectorByEnteringValues = new JMenuItem("Vektor bet\u00F6lt\u00E9se");
-		mnEnteringValues.add(mntmImportVectorByEnteringValues);
+		JMenuItem mnExportMethodsResult = new JMenuItem("M\u00F3dszerek eredm\u00E9nyeinek export\u00E1l\u00E1sa");
+		mnMethods.add(mnExportMethodsResult);
 
-		JMenuItem mntmImportMatrixByEnteringValues = new JMenuItem("M\u00E1trix bet\u00F6lt\u00E9se");
-		mnEnteringValues.add(mntmImportMatrixByEnteringValues);
+		JMenu mnHelp = new JMenu("S\u00FAg\u00F3");
+		menuBar.add(mnHelp);
 
-		JMenu mnFromFile = new JMenu("F\u00E1jlb\u00F3l");
-		mnImport.add(mnFromFile);
-
-		JMenuItem mntmImportVectorFromFile = new JMenuItem("Vektor bet\u00F6lt\u00E9se");
-		mnFromFile.add(mntmImportVectorFromFile);
-
-		JMenuItem mntmImportMatrixFromFile = new JMenuItem("M\u00E1trix bet\u00F6lt\u00E9se");
-		mnFromFile.add(mntmImportMatrixFromFile);
+		JMenuItem mntmOverview = new JMenuItem("\u00C1ttekint\u00E9s");
+		mnHelp.add(mntmOverview);
 
 		getContentPane().add(new WelcomePanel());
 
