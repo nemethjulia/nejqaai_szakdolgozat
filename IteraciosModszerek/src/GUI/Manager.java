@@ -18,7 +18,10 @@ public class Manager {
 	}
 
 	private Manager() {
+		restartProcess();
+	}
 
+	public void restartProcess() {
 		matrix = new MySparseMatrix(0);
 		xVectors = new ArrayList<MySparseVector>();
 		bVector = new MySparseVector(0);
@@ -39,6 +42,14 @@ public class Manager {
 
 	public List<MySparseVector> getxVectors() {
 		return xVectors;
+	}
+
+	public String[] getxVectorsString() {
+		String[] vectors = new String[xVectors.size()];
+		for (int i = 0; i < xVectors.size(); ++i) {
+			vectors[i] = xVectors.get(i).toString();
+		}
+		return vectors;
 	}
 
 	public void addXVector(MySparseVector xVector) {

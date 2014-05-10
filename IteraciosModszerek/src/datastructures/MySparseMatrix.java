@@ -154,6 +154,17 @@ public class MySparseMatrix {
 		return matrix;
 	}
 
+	public String toFileFormat() {
+		String matrix = "";
+
+		matrix += size + "\n";
+		for (MatrixItem item : data) {
+			matrix += item.getRow() + "," + item.getCol() + "," + item.getValue() + "\n";
+		}
+
+		return matrix;
+	}
+
 	private final void checkIndex(int index) {
 		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException();

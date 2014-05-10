@@ -31,6 +31,16 @@ public class MyFrame extends JFrame {
 		menuBar.add(mnFile);
 
 		JMenuItem mntmNewProcess = new JMenuItem("\u00DAj folyamat");
+		mntmNewProcess.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Manager.getInstance().restartProcess();
+				getContentPane().removeAll();
+				getContentPane().add(new WelcomePanel());
+				pack();
+			}
+		});
 		mnFile.add(mntmNewProcess);
 
 		JMenu mnImport = new JMenu("Bet\u00F6lt\u00E9s");
@@ -73,11 +83,17 @@ public class MyFrame extends JFrame {
 		});
 		mnFile.add(mntmrtkekMegjelentse);
 
-		JMenu mnSave = new JMenu("Ment\u00E9s");
-		mnFile.add(mnSave);
-
 		JMenuItem mntmSaveToFile = new JMenuItem("Ment\u00E9s f\u00E1jlba");
-		mnSave.add(mntmSaveToFile);
+		mntmSaveToFile.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				getContentPane().removeAll();
+				getContentPane().add(new ExportToFile());
+				pack();
+			}
+		});
+		mnFile.add(mntmSaveToFile);
 
 		JMenuItem mntmExit = new JMenuItem("Kil\u00E9p\u00E9s");
 		mntmExit.addActionListener(new ActionListener() {

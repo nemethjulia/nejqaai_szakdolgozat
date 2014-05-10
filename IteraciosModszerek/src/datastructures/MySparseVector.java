@@ -86,6 +86,17 @@ public class MySparseVector {
 		return vector + "]T";
 	}
 
+	public String toFileFormat() {
+		String vector = "";
+
+		vector += size + "\n";
+		for (VectorItem item : data) {
+			vector += item.getIndex() + "," + item.getValue() + "\n";
+		}
+
+		return vector;
+	}
+
 	@Override
 	public MySparseVector clone() {
 		MySparseVector x = new MySparseVector(size);
