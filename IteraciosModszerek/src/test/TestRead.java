@@ -1,5 +1,7 @@
 package test;
 
+import java.io.File;
+
 import junit.framework.Assert;
 
 import org.junit.After;
@@ -31,14 +33,14 @@ public class TestRead {
 
 	@Test
 	public void testReadVector() {
-		MySparseVector vector = MySparseVector.readFromFile("src/test/vector.txt");
+		MySparseVector vector = MySparseVector.readFromFile(new File("src/test/vector.txt"));
 		Assert.assertNotNull(vector);
 		Assert.assertEquals("[ 1.0 2.0 3.0 4.0 ]T", vector.toString());
 	}
 
 	@Test
 	public void testReadMatrix() {
-		MySparseMatrix matrix = MySparseMatrix.readFromFile("src/test/matrix.txt");
+		MySparseMatrix matrix = MySparseMatrix.readFromFile(new File("src/test/matrix.txt"));
 		Assert.assertNotNull(matrix);
 		Assert.assertEquals("4.0 0 0 0 \n0 4.0 0 0 \n0 0 4.0 3.0 \n0 0 3.0 4.0 \n", matrix.toString());
 	}

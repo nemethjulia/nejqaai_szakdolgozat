@@ -37,9 +37,28 @@ public class MyFrame extends JFrame {
 		mnFile.add(mnImport);
 
 		JMenuItem mnEnteringValues = new JMenuItem("\u00C9rt\u00E9kek megad\u00E1s\u00E1val");
+		mnEnteringValues.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				getContentPane().removeAll();
+				getContentPane().add(new ImportEnteringValues());
+				pack();
+
+			}
+		});
 		mnImport.add(mnEnteringValues);
 
 		JMenuItem mnFromFile = new JMenuItem("F\u00E1jlb\u00F3l");
+		mnFromFile.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				getContentPane().removeAll();
+				getContentPane().add(new ImportFromFilePanel());
+				pack();
+			}
+		});
 		mnImport.add(mnFromFile);
 
 		JMenu mnSave = new JMenu("Ment\u00E9s");

@@ -1,16 +1,24 @@
 package GUI;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import datastructures.MySparseMatrix;
+import datastructures.MySparseVector;
 
 public class ImportFromFilePanel extends JPanel {
 	/**
@@ -18,8 +26,12 @@ public class ImportFromFilePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 532472660198249533L;
 
-	private String vectorDescription = "";
-	private String matrixDescription = "";
+	private JComboBox<String> comboBoxDataStructure;
+	private JComboBox<String> comboBoxVectorStatus;
+	private JTextArea txtrDescription;
+
+	private String vectorDescription = "vector";
+	private String matrixDescription = "matrix";
 
 	public ImportFromFilePanel() {
 		setBorder(null);
@@ -31,26 +43,68 @@ public class ImportFromFilePanel extends JPanel {
 		textAsking.setEditable(false);
 		textAsking.setColumns(30);
 
-		JComboBox<String> comboBoxDataStructure = new JComboBox<String>();
-		comboBoxDataStructure.setModel(new DefaultComboBoxModel<String>(new String[] { "Vektor", "M\u00E1trix" }));
-		comboBoxDataStructure.setSelectedIndex(0);
+		comboBoxVectorStatus = new JComboBox<String>();
+		comboBoxVectorStatus.setModel(new DefaultComboBoxModel<String>(new String[] { "Egy X0 érték", "B" }));
+		comboBoxVectorStatus.setSelectedIndex(0);
 
-		JTextArea txtrDescription = new JTextArea();
+		txtrDescription = new JTextArea();
 		txtrDescription.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtrDescription.setEditable(false);
+		txtrDescription.setText(vectorDescription);
 
 		JButton btnImport = new JButton("Beolvas\u00E1s");
+		btnImport.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				JFileChooser chooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT", "txt");
+				chooser.setFileFilter(filter);
+				int returnVal = chooser.showOpenDialog(getParent());
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					if (comboBoxDataStructure.getSelectedIndex() == 0) {
+						MySparseVector vector = MySparseVector.readFromFile(chooser.getSelectedFile());
+						if (vector != null) {
+							if (comboBoxVectorStatus.getSelectedIndex() == 0) {
+								Manager.getInstance().addXVector(vector);
+							} else {
+								Manager.getInstance().setBVector(vector);
+							}
+						}
+					} else if (comboBoxDataStructure.getSelectedIndex() == 1) {
+						MySparseMatrix matrix = MySparseMatrix.readFromFile(chooser.getSelectedFile());
+						if (matrix != null) {
+							Manager.getInstance().setMatrix(matrix);
+						}
+					}
+				}
+			}
+
+		});
+
+		comboBoxDataStructure = new JComboBox<String>();
+		comboBoxDataStructure.setModel(new DefaultComboBoxModel<String>(new String[] { "Vektor", "M\u00E1trix" }));
+		comboBoxDataStructure.setSelectedIndex(0);
+		comboBoxDataStructure.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				if (comboBoxDataStructure.getSelectedIndex() == 0) {
+					txtrDescription.setText(vectorDescription);
+					comboBoxVectorStatus.setEnabled(true);
+				} else if (comboBoxDataStructure.getSelectedIndex() == 1) {
+					txtrDescription.setText(matrixDescription);
+					comboBoxVectorStatus.setEnabled(false);
+				}
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout
-				.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(textAsking, GroupLayout.PREFERRED_SIZE, 580, GroupLayout.PREFERRED_SIZE).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(
-						groupLayout.createSequentialGroup().addGap(50).addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE).addGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addComponent(btnImport, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE).addComponent(txtrDescription, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)))
-								.addContainerGap(50, Short.MAX_VALUE)));
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addContainerGap().addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE).addComponent(textAsking, GroupLayout.PREFERRED_SIZE, 580, GroupLayout.PREFERRED_SIZE)).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup().addGap(50).addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED, 274, Short.MAX_VALUE).addComponent(btnImport).addGap(75))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(txtrDescription, GroupLayout.PREFERRED_SIZE, 580, GroupLayout.PREFERRED_SIZE).addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
-				groupLayout.createSequentialGroup().addGap(15).addComponent(textAsking, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGap(10).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)).addGroup(groupLayout.createSequentialGroup().addGap(30).addComponent(btnImport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))).addGap(35)
-						.addComponent(txtrDescription, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE).addContainerGap(25, Short.MAX_VALUE)));
+				groupLayout.createSequentialGroup().addContainerGap().addComponent(textAsking, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE).addGap(20).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(btnImport)).addGap(11).addComponent(txtrDescription, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE).addContainerGap()));
 		setLayout(groupLayout);
 	}
 }

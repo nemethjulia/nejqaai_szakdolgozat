@@ -5,6 +5,7 @@
 package datastructures;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -99,9 +100,9 @@ public class MySparseVector {
 			throw new IndexOutOfBoundsException();
 	}
 
-	public static MySparseVector readFromFile(String fileName) {
+	public static MySparseVector readFromFile(File file) {
 		try {
-			return readFromFile(new BufferedReader(new FileReader(fileName)));
+			return readFromFile(new BufferedReader(new FileReader(file)));
 		} catch (IOException e) {
 			return null;
 		}
