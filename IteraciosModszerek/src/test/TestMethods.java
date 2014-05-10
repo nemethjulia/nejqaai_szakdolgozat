@@ -78,8 +78,6 @@ public class TestMethods {
 		try {
 			MySparseVector xnew = j.solve(getMatrix(), getB(), getX0());
 
-			System.out.println(xnew);
-
 			Assert.assertTrue(xnew.substract(getSolution()).norm() < 1);
 
 		} catch (Exception e) {
@@ -93,8 +91,6 @@ public class TestMethods {
 
 		try {
 			MySparseVector xnew = gs.solve(getMatrix(), getB(), getX0());
-
-			System.out.println(xnew);
 
 			Assert.assertTrue(xnew.substract(getSolution()).norm() < 1);
 
@@ -110,8 +106,6 @@ public class TestMethods {
 		try {
 			MySparseVector xnew = g.solve(getMatrix(), getB(), getX0());
 
-			System.out.println(xnew);
-
 			Assert.assertTrue(xnew.substract(getSolution()).norm() < 1);
 
 		} catch (Exception e) {
@@ -125,8 +119,6 @@ public class TestMethods {
 
 		try {
 			MySparseVector xnew = cg.solve(getMatrix(), getB(), getX0());
-
-			System.out.println(xnew);
 
 			Assert.assertTrue(xnew.substract(getSolution()).norm() < 1);
 
