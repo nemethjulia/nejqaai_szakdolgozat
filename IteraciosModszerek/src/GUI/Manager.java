@@ -19,9 +19,9 @@ public class Manager {
 
 	private Manager() {
 
-		matrix = null;
+		matrix = new MySparseMatrix(0);
 		xVectors = new ArrayList<MySparseVector>();
-		bVector = null;
+		bVector = new MySparseVector(0);
 	}
 
 	private MySparseMatrix matrix;

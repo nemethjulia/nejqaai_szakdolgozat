@@ -134,12 +134,18 @@ public class MySparseMatrix {
 			} else if (rowindex.get(k).getRow() == i) {
 				int l = rowindex.get(k).getIndex();
 				for (int j = 0; j < size; ++j) {
-					MatrixItem item = data.get(l);
-					if (l < data.size() && j == item.getCol() && k == item.getRow()) {
-						matrix += item.getValue() + " ";
-						++l;
-					} else
+					if (l < data.size()) {
+						MatrixItem item = data.get(l);
+						if (j == item.getCol() && i == item.getRow()) {
+							matrix += item.getValue() + " ";
+							++l;
+						} else {
+							matrix += "0 ";
+						}
+
+					} else {
 						matrix += "0 ";
+					}
 				}
 				++k;
 			}

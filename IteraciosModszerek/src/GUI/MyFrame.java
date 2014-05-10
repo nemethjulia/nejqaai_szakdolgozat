@@ -61,6 +61,18 @@ public class MyFrame extends JFrame {
 		});
 		mnImport.add(mnFromFile);
 
+		JMenuItem mntmrtkekMegjelentse = new JMenuItem("\u00C9rt\u00E9kek megjelen\u00EDt\u00E9se");
+		mntmrtkekMegjelentse.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				getContentPane().removeAll();
+				getContentPane().add(new ShowValues());
+				pack();
+			}
+		});
+		mnFile.add(mntmrtkekMegjelentse);
+
 		JMenu mnSave = new JMenu("Ment\u00E9s");
 		mnFile.add(mnSave);
 
