@@ -1,4 +1,4 @@
-package GUI.fileComponents.showDataStructures;
+package gui.fileComponents.showDataStructures;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

@@ -1,4 +1,8 @@
-package GUI.fileComponents;
+package gui.fileComponents;
+
+import gui.Manager;
+import gui.fileComponents.showDataStructures.MatrixComponent;
+import gui.fileComponents.showDataStructures.VectorComponent;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -7,9 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import GUI.Manager;
-import GUI.fileComponents.showDataStructures.MatrixComponent;
-import GUI.fileComponents.showDataStructures.VectorComponent;
 import datastructures.MySparseVector;
 
 public class ShowValues extends JPanel {

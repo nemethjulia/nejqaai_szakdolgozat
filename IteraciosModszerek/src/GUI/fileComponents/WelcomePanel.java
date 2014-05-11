@@ -1,4 +1,4 @@
-package GUI.fileComponents;
+package gui.fileComponents;
 
 import java.awt.Font;
 import java.awt.image.BufferedImage;

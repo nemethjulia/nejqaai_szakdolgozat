@@ -1,4 +1,6 @@
-package GUI.fileComponents;
+package gui.fileComponents;
+
+import gui.Manager;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -20,7 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 
-import GUI.Manager;
 import datastructures.MySparseMatrix;
 import datastructures.MySparseVector;
 

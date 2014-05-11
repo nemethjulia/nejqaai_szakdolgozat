@@ -1,4 +1,10 @@
-package GUI;
+package gui;
+
+import gui.fileComponents.ExportToFile;
+import gui.fileComponents.ImportEnteringValues;
+import gui.fileComponents.ImportFromFilePanel;
+import gui.fileComponents.ShowValues;
+import gui.fileComponents.WelcomePanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,12 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
-import GUI.fileComponents.ExportToFile;
-import GUI.fileComponents.ImportEnteringValues;
-import GUI.fileComponents.ImportFromFilePanel;
-import GUI.fileComponents.ShowValues;
-import GUI.fileComponents.WelcomePanel;
 
 public class MyFrame extends JFrame {
 
