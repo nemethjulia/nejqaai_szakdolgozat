@@ -14,10 +14,12 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import datastructures.MySparseVector;
 
@@ -31,6 +33,8 @@ public class ExportToFile extends JPanel {
 	private JComboBox<String> comboBoxDataStructure;
 	private JComboBox<String> comboBoxVectorStatus;
 
+	private boolean letsSave = true;
+
 	public ExportToFile() {
 		setBorder(null);
 
@@ -43,7 +47,9 @@ public class ExportToFile extends JPanel {
 
 		comboBoxVectorStatus = new JComboBox<String>();
 		comboBoxVectorStatus.setModel(new DefaultComboBoxModel<String>(Manager.getInstance().getxVectorsString()));
-		comboBoxVectorStatus.setSelectedIndex(0);
+		if (comboBoxVectorStatus.getItemCount() > 0) {
+			comboBoxVectorStatus.setSelectedIndex(0);
+		}
 
 		JButton btnExport = new JButton("Mentés");
 		btnExport.addActionListener(new ActionListener() {
@@ -56,30 +62,42 @@ public class ExportToFile extends JPanel {
 				String dataToFile = "";
 				switch (comboBoxDataStructure.getSelectedIndex()) {
 					case 0 :
-						MySparseVector vector = manager.getxVectors().get(comboBoxVectorStatus.getSelectedIndex());
-						dataToFile = vector.toFileFormat();
+						if (comboBoxVectorStatus.getSelectedIndex() > -1) {
+							MySparseVector vector = manager.getxVectors().get(comboBoxVectorStatus.getSelectedIndex());
+							dataToFile = vector.toFileFormat();
+							letsSave = true;
+						} else {
+							JOptionPane.showMessageDialog(getParent(), "Nem megfelelõ érték!");
+							letsSave = false;
+						}
 						break;
 
 					case 1 :
 						dataToFile = manager.getBVector().toFileFormat();
+						letsSave = true;
 						break;
 
 					case 2 :
 						dataToFile = manager.getMatrix().toFileFormat();
+						letsSave = true;
 						break;
 
 					default :
 						break;
 				}
 
-				JFileChooser chooser = new JFileChooser();
-				int returnVal = chooser.showSaveDialog(getParent());
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					try (FileWriter fw = new FileWriter(chooser.getSelectedFile() + ".txt")) {
-						fw.write(dataToFile);
-						fw.close();
-					} catch (IOException e) {
-						e.printStackTrace();
+				if (letsSave) {
+					JFileChooser chooser = new JFileChooser();
+					FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT", "txt");
+					chooser.setFileFilter(filter);
+					int returnVal = chooser.showSaveDialog(getParent());
+					if (returnVal == JFileChooser.APPROVE_OPTION) {
+						try (FileWriter fw = new FileWriter(chooser.getSelectedFile() + ".txt")) {
+							fw.write(dataToFile);
+							fw.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
