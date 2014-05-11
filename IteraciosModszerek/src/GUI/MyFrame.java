@@ -8,6 +8,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import GUI.fileComponents.ExportToFile;
+import GUI.fileComponents.ImportEnteringValues;
+import GUI.fileComponents.ImportFromFilePanel;
+import GUI.fileComponents.ShowValues;
+import GUI.fileComponents.WelcomePanel;
+
 public class MyFrame extends JFrame {
 
 	/**

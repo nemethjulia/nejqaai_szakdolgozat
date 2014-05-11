@@ -1,4 +1,4 @@
-package GUI;
+package GUI.fileComponents;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -7,6 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import GUI.Manager;
+import GUI.fileComponents.showDataStructures.MatrixComponent;
+import GUI.fileComponents.showDataStructures.VectorComponent;
 import datastructures.MySparseVector;
 
 public class ShowValues extends JPanel {
@@ -16,22 +19,28 @@ public class ShowValues extends JPanel {
 	 */
 	private static final long serialVersionUID = 5680723855545340540L;
 
-	private JTextArea matrixArea;
+	private MatrixComponent matrixArea;
 	private JTextArea xVectorsArea;
-	private JTextArea bVectorArea;
+	private VectorComponent bVectorArea;
 
 	public ShowValues() {
 		super();
 
-		matrixArea = new JTextArea();
+		Manager manager = Manager.getInstance();
+		matrixArea = new MatrixComponent(manager.getMatrix());
 
 		JLabel lblBetltttMtrix = new JLabel("Bet\u00F6lt\u00F6tt m\u00E1trix:");
 
 		xVectorsArea = new JTextArea();
+		String xVectors = "";
+		for (MySparseVector x : manager.getxVectors()) {
+			xVectors += x.toString();
+		}
+		xVectorsArea.setText(xVectors);
 
 		JLabel lblXVektorok = new JLabel("X0 vektorok: ");
 
-		bVectorArea = new JTextArea();
+		bVectorArea = new VectorComponent(manager.getBVector());
 
 		JLabel lblBVektor = new JLabel("b vektor");
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -49,17 +58,5 @@ public class ShowValues extends JPanel {
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(bVectorArea, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE).addComponent(lblBVektor, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)).addContainerGap(12, Short.MAX_VALUE)));
 		setLayout(groupLayout);
 
-		setValues();
-	}
-
-	private void setValues() {
-		Manager manager = Manager.getInstance();
-		matrixArea.setText(manager.getMatrix().toString());
-		String xVectors = "";
-		for (MySparseVector x : manager.getxVectors()) {
-			xVectors += x.toString();
-		}
-		xVectorsArea.setText(xVectors);
-		bVectorArea.setText(manager.getBVector().toString());
 	}
 }
