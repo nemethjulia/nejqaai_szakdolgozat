@@ -40,7 +40,7 @@ public class ExportToFile extends JPanel {
 
 		JTextField textAsking = new JTextField();
 		textAsking.setHorizontalAlignment(SwingConstants.CENTER);
-		textAsking.setText("K\u00E9rem, v\u00E1lassza ki a beolvasand\u00F3 adatt\u00EDpust!");
+		textAsking.setText("K\u00E9rem, v\u00E1lassza ki a ki\u00EDrand\u00F3 adatt\u00EDpust!");
 		textAsking.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textAsking.setEditable(false);
 		textAsking.setColumns(30);
@@ -106,7 +106,7 @@ public class ExportToFile extends JPanel {
 
 		comboBoxDataStructure = new JComboBox<String>();
 		comboBoxDataStructure.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		comboBoxDataStructure.setModel(new DefaultComboBoxModel<String>(new String[] { "egy X0 vektor", "b vektor", "m\u00E1trix" }));
+		comboBoxDataStructure.setModel(new DefaultComboBoxModel<String>(new String[] { "Egy X0 kezdõvektor", "A b jobboldali vektor", "m\u00E1trix" }));
 		comboBoxDataStructure.setSelectedIndex(0);
 		comboBoxDataStructure.addActionListener(new ActionListener() {
 

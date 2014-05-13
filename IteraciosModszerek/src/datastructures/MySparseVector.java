@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import exceptions.NotSameSize;
-
 /**
  * @author julcsi
  * 
@@ -52,18 +50,20 @@ public class MySparseVector {
 	}
 
 	public void setValue(int index, double value) {
-		checkIndex(index);
-		for (int i = 0; i < data.size(); ++i) {
-			VectorItem item = data.get(i);
-			if (item.getIndex() == index) {
-				item.setValue(value);
-				return;
-			} else if (item.getIndex() > index) {
-				data.add(i, new VectorItem(index, value));
-				return;
+		if (value != 0.0) {
+			checkIndex(index);
+			for (int i = 0; i < data.size(); ++i) {
+				VectorItem item = data.get(i);
+				if (item.getIndex() == index) {
+					item.setValue(value);
+					return;
+				} else if (item.getIndex() > index) {
+					data.add(i, new VectorItem(index, value));
+					return;
+				}
 			}
+			data.add(new VectorItem(index, value));
 		}
-		data.add(new VectorItem(index, value));
 	}
 
 	@Override
@@ -145,17 +145,14 @@ public class MySparseVector {
 		return vector;
 	}
 
-	public MySparseVector add(MySparseVector otherVector) throws NotSameSize {
-		if (size != otherVector.getSize()) {
-			throw new NotSameSize("Nem ugyanakkora a két vektor!");
-		}
+	public MySparseVector add(MySparseVector otherVector) {
 		MySparseVector newVector = new MySparseVector(size);
 
 		List<VectorItem> otherData = otherVector.getData();
 
 		int thisI = 0;
 		int otherI = 0;
-		while (thisI < data.size() || otherI < otherData.size()) {
+		while (thisI < data.size() && otherI < otherData.size()) {
 			VectorItem thisItem = data.get(thisI);
 			VectorItem otherItem = otherData.get(otherI);
 
@@ -171,26 +168,23 @@ public class MySparseVector {
 				++thisI;
 			}
 
-			if (thisI == data.size() && otherI != otherData.size()) {
-				for (int i = otherI; i < otherData.size(); i++) {
-					otherItem = otherData.get(i);
-					newVector.setValue(otherItem.getIndex(), otherItem.getValue());
-				}
-			} else if (thisI != data.size() && otherI == otherData.size()) {
-				for (int i = thisI; i < data.size(); i++) {
-					thisItem = data.get(i);
-					newVector.setValue(thisItem.getIndex(), thisItem.getValue());
-				}
+		}
+		if (thisI == data.size() && otherI != otherData.size()) {
+			for (int i = otherI; i < otherData.size(); i++) {
+				VectorItem otherItem = otherData.get(i);
+				newVector.setValue(otherItem.getIndex(), otherItem.getValue());
+			}
+		} else if (thisI != data.size() && otherI == otherData.size()) {
+			for (int i = thisI; i < data.size(); i++) {
+				VectorItem thisItem = data.get(i);
+				newVector.setValue(thisItem.getIndex(), thisItem.getValue());
 			}
 		}
 
 		return newVector;
 	}
 
-	public MySparseVector substract(MySparseVector otherVector) throws NotSameSize {
-		if (size != otherVector.getSize()) {
-			throw new NotSameSize("Nem ugyanakkora a két vektor!");
-		}
+	public MySparseVector substract(MySparseVector otherVector) {
 		MySparseVector newVector = new MySparseVector(size);
 
 		List<VectorItem> otherData = otherVector.getData();
@@ -229,17 +223,14 @@ public class MySparseVector {
 		return newVector;
 	}
 
-	public double multiple(MySparseVector otherVector) throws NotSameSize {
-		if (size != otherVector.getSize()) {
-			throw new NotSameSize("Nem ugyanakkora a két vektor!");
-		}
+	public double multiple(MySparseVector otherVector) {
 		double sum = 0;
 
 		List<VectorItem> otherData = otherVector.getData();
 
 		int thisI = 0;
 		int otherI = 0;
-		while (thisI < data.size() || otherI < otherData.size()) {
+		while (thisI < data.size() && otherI < otherData.size()) {
 			VectorItem thisItem = data.get(thisI);
 			VectorItem otherItem = otherData.get(otherI);
 

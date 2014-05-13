@@ -58,7 +58,7 @@ public class ImportEnteringValues extends JPanel {
 		textAsking.setColumns(30);
 
 		comboBoxVectorStatus = new JComboBox<String>();
-		comboBoxVectorStatus.setModel(new DefaultComboBoxModel<String>(new String[] { "Egy X0 érték", "B" }));
+		comboBoxVectorStatus.setModel(new DefaultComboBoxModel<String>(new String[] { "Egy X0 kezdõvektor", "A b jobboldali vektor" }));
 		comboBoxVectorStatus.setSelectedIndex(0);
 		btnImport = new JButton("Beolvas\u00E1s");
 		btnImport.addActionListener(new ActionListener() {
@@ -122,11 +122,11 @@ public class ImportEnteringValues extends JPanel {
 				try {
 					int value = Integer.parseInt(rowField.getText());
 					if (!checkIndex(value)) {
-						JOptionPane.showMessageDialog(rowField, "Nem megfelelõ érték!");
+						showMessage("Nem megfelelõ érték!");
 						rowField.requestFocus();
 					}
 				} catch (NumberFormatException exc) {
-					JOptionPane.showMessageDialog(rowField, "Nem megfelelõ érték!");
+					showMessage("Nem megfelelõ érték!");
 					rowField.requestFocus();
 				}
 			}
@@ -144,11 +144,11 @@ public class ImportEnteringValues extends JPanel {
 				try {
 					int value = Integer.parseInt(colField.getText());
 					if (!checkIndex(value)) {
-						JOptionPane.showMessageDialog(colField, "Nem megfelelõ érték!");
+						showMessage("Nem megfelelõ érték!");
 						colField.requestFocus();
 					}
 				} catch (NumberFormatException exc) {
-					JOptionPane.showMessageDialog(colField, "Nem megfelelõ érték!");
+					showMessage("Nem megfelelõ érték!");
 					colField.requestFocus();
 				}
 			}
@@ -173,7 +173,7 @@ public class ImportEnteringValues extends JPanel {
 				try {
 					Double.parseDouble(valueField.getText());
 				} catch (NumberFormatException exc) {
-					JOptionPane.showMessageDialog(valueField, "Nem megfelelõ érték!");
+					showMessage("Nem megfelelõ érték!");
 					valueField.requestFocus();
 				}
 			}
@@ -230,7 +230,18 @@ public class ImportEnteringValues extends JPanel {
 						Manager.getInstance().setBVector((MySparseVector) newObject);
 					}
 				} else if (comboBoxDataStructure.getSelectedIndex() == 1) {
-					Manager.getInstance().setMatrix((MySparseMatrix) newObject);
+					MySparseMatrix matrix = (MySparseMatrix) newObject;
+					String msg = "Az alkalmazás a mátrix pozitív definitségét nem ellenõrzi!\n";
+					if (!matrix.isSymmetryc()) {
+						msg += "A mátrix nem szimmetrikus!\n";
+					}
+					if (!matrix.isDiagonalDominant()) {
+						msg += "A mátrix nem szigorúan diagonálisan domináns!\n";
+					}
+					msg += "Így a módszerek valószínûleg nem minden x0 vektorra fognak konvergálni.";
+
+					showMessage(msg);
+					Manager.getInstance().setMatrix(matrix);
 				}
 
 				startStatus();
@@ -283,6 +294,11 @@ public class ImportEnteringValues extends JPanel {
 		startStatus();
 	}
 
+	private void showMessage(String msg) {
+
+		JOptionPane.showMessageDialog(this, msg);
+	}
+
 	private void valueFieldChanged() {
 		try {
 			double value = Double.parseDouble(valueField.getText());
@@ -300,7 +316,7 @@ public class ImportEnteringValues extends JPanel {
 			valueField.setText("0");
 			rowField.requestFocus();
 		} catch (NumberFormatException exc) {
-			JOptionPane.showMessageDialog(valueField, "Nem megfelelõ érték!");
+			showMessage("Nem megfelelõ érték!");
 		}
 	}
 
@@ -336,7 +352,7 @@ public class ImportEnteringValues extends JPanel {
 				}
 			}
 		} catch (NumberFormatException exc) {
-			JOptionPane.showMessageDialog(sizeField, "Nem megfelelõ érték!");
+			showMessage("Nem megfelelõ érték!");
 		}
 	}
 

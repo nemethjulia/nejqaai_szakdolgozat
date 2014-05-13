@@ -12,6 +12,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -46,7 +47,7 @@ public class ImportFromFilePanel extends JPanel {
 		textAsking.setColumns(30);
 
 		comboBoxVectorStatus = new JComboBox<String>();
-		comboBoxVectorStatus.setModel(new DefaultComboBoxModel<String>(new String[] { "Egy X0 érték", "B" }));
+		comboBoxVectorStatus.setModel(new DefaultComboBoxModel<String>(new String[] { "Egy X0 kezdõvektor", "A b jobboldali vektor" }));
 		comboBoxVectorStatus.setSelectedIndex(0);
 
 		txtrDescription = new JTextArea();
@@ -76,6 +77,16 @@ public class ImportFromFilePanel extends JPanel {
 					} else if (comboBoxDataStructure.getSelectedIndex() == 1) {
 						MySparseMatrix matrix = MySparseMatrix.readFromFile(chooser.getSelectedFile());
 						if (matrix != null) {
+							String msg = "Az alkalmazás a mátrix pozitív definitségét nem ellenõrzi!\n";
+							if (!matrix.isSymmetryc()) {
+								msg += "A mátrix nem szimmetrikus!\n";
+							}
+							if (!matrix.isDiagonalDominant()) {
+								msg += "A mátrix nem szigorúan diagonálisan domináns!\n";
+							}
+							msg += "Így a módszerek valószínûleg nem minden x0 vektorra fognak konvergálni.";
+
+							showMessage(msg);
 							Manager.getInstance().setMatrix(matrix);
 						}
 					}
@@ -108,5 +119,10 @@ public class ImportFromFilePanel extends JPanel {
 				groupLayout.createSequentialGroup().addContainerGap().addComponent(textAsking, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE).addGap(20).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(btnImport)).addGap(11).addComponent(txtrDescription, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE).addContainerGap()));
 		setLayout(groupLayout);
+	}
+
+	private void showMessage(String msg) {
+
+		JOptionPane.showMessageDialog(this, msg);
 	}
 }

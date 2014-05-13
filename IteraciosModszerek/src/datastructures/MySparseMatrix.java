@@ -82,43 +82,45 @@ public class MySparseMatrix {
 	}
 
 	public void setValue(int row, int col, double value) {
-		checkIndex(row);
-		checkIndex(col);
-		// szimmetrikus matrixhoz a row-t meg a colt kell felcserelni, ha a
-		// col>row
-		for (int i = 0; i < rowindex.size(); ++i) {
-			Magick m = rowindex.get(i);
-			if (m.getRow() == row) {
-				for (int j = m.getIndex(); j < data.size(); ++j) {
-					MatrixItem b = data.get(j);
-					if (b.getCol() == col) {
-						b.setValue(value);
-						return;
-					} else if (b.getCol() > col || b.getRow() > row) {
-						data.add(j, new MatrixItem(row, col, value));
-						for (int k = i + 1; k < rowindex.size(); ++k)
-							rowindex.get(k).increaseIndex();
-						return;
+		if (value != 0.0) {
+			checkIndex(row);
+			checkIndex(col);
+			// szimmetrikus matrixhoz a row-t meg a colt kell felcserelni, ha a
+			// col>row
+			for (int i = 0; i < rowindex.size(); ++i) {
+				Magick m = rowindex.get(i);
+				if (m.getRow() == row) {
+					for (int j = m.getIndex(); j < data.size(); ++j) {
+						MatrixItem b = data.get(j);
+						if (b.getCol() == col) {
+							b.setValue(value);
+							return;
+						} else if (b.getCol() > col || b.getRow() > row) {
+							data.add(j, new MatrixItem(row, col, value));
+							for (int k = i + 1; k < rowindex.size(); ++k)
+								rowindex.get(k).increaseIndex();
+							return;
+						}
 					}
-				}
-				if (i < rowindex.size() - 1)
-					data.add(rowindex.get(i + 1).getIndex(), new MatrixItem(row, col, value));
-				else
-					data.add(new MatrixItem(row, col, value));
+					if (i < rowindex.size() - 1)
+						data.add(rowindex.get(i + 1).getIndex(), new MatrixItem(row, col, value));
+					else
+						data.add(new MatrixItem(row, col, value));
 
-				for (int k = i + 1; k < rowindex.size(); ++k)
-					rowindex.get(k).increaseIndex();
-				return;
-			} else if (m.getRow() > row) {
-				data.add(m.getIndex(), new MatrixItem(row, col, value));
-				rowindex.add(i, new Magick(row, m.getIndex()));
-				for (int k = i + 1; k < rowindex.size(); ++k)
-					rowindex.get(k).increaseIndex();
-				return;
+					for (int k = i + 1; k < rowindex.size(); ++k)
+						rowindex.get(k).increaseIndex();
+					return;
+				} else if (m.getRow() > row) {
+					data.add(m.getIndex(), new MatrixItem(row, col, value));
+					rowindex.add(i, new Magick(row, m.getIndex()));
+					for (int k = i + 1; k < rowindex.size(); ++k)
+						rowindex.get(k).increaseIndex();
+					return;
+				}
 			}
+			data.add(new MatrixItem(row, col, value));
+			rowindex.add(new Magick(row, data.size() - 1));
 		}
-		data.add(new MatrixItem(row, col, value));
-		rowindex.add(new Magick(row, data.size() - 1));
 	}
 
 	@Override
@@ -168,6 +170,55 @@ public class MySparseMatrix {
 	private final void checkIndex(int index) {
 		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException();
+	}
+
+	@Override
+	public MySparseMatrix clone() {
+		MySparseMatrix x = new MySparseMatrix(size);
+		for (MatrixItem i : data) {
+			x.data.add(new MatrixItem(i.getRow(), i.getCol(), i.getValue()));
+		}
+		for (Magick i : rowindex) {
+			x.rowindex.add(new Magick(i.getRow(), i.getIndex()));
+		}
+		return x;
+	}
+
+	/*
+	 * public MySparseMatrix add(MySparseMatrix otherMatrix) throws NotSameSize { MySparseMatrix result = this.clone();
+	 * 
+	 * if (size != otherMatrix.getSize()) { throw new NotSameSize("Nem ugyanakkora a két vektor!"); }
+	 * 
+	 * List<MatrixItem> otherData = otherMatrix.getData();
+	 * 
+	 * int thisI = 0; int otherI = 0; while (thisI < data.size() || otherI < otherData.size()) { MatrixItem thisItem = data.get(thisI); MatrixItem otherItem = otherData.get(otherI);
+	 * 
+	 * if (thisItem.getRow() == otherItem.getRow()) { if(thisItem) result.setValue(thisItem.getRow(), thisItem.getCol(), thisItem.getValue() + otherItem.getValue()); ++thisI; ++otherI; } else if (thisItem.getRow() > otherItem.getRow()) { result.setValue(otherItem.getRow(), otherItem.getCol(), otherItem.getValue()); ++otherI; } else if (thisItem.getRow() < otherItem.getRow()) {
+	 * result.setValue(thisItem.getRow(), thisItem.getCol(), thisItem.getValue()); ++thisI; }
+	 * 
+	 * if (thisI == data.size() && otherI != otherData.size()) { for (int i = otherI; i < otherData.size(); i++) { otherItem = otherData.get(i); result.setValue(otherItem.getRow(), otherItem.getCol(), otherItem.getValue()); } } else if (thisI != data.size() && otherI == otherData.size()) { for (int i = thisI; i < data.size(); i++) { thisItem = data.get(i); result.setValue(thisItem.getRow(),
+	 * thisItem.getCol(), thisItem.getValue()); } } }
+	 * 
+	 * return result; }
+	 */
+
+	public MySparseVector multiple(MySparseVector v) {
+		MySparseVector result = new MySparseVector(v.getSize());
+
+		int row = 0;
+		double rowsum = 0;
+		for (MatrixItem i : data) {
+			if (i.getRow() != row) {
+				result.setValue(row, rowsum);
+				row = i.getRow();
+				rowsum = 0;
+			}
+
+			rowsum += i.getValue() * v.getValue(i.getCol());
+		}
+		result.setValue(row, rowsum);
+
+		return result;
 	}
 
 	public static MySparseMatrix readFromFile(File file) {
