@@ -5,6 +5,7 @@ import gui.fileComponents.ImportEnteringValues;
 import gui.fileComponents.ImportFromFilePanel;
 import gui.fileComponents.ShowValues;
 import gui.fileComponents.WelcomePanel;
+import gui.methodComponents.MethodComponent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class MyFrame extends JFrame {
 
@@ -77,6 +79,18 @@ public class MyFrame extends JFrame {
 		});
 		mnImport.add(mnFromFile);
 
+		JMenuItem mntmImportTestData = new JMenuItem("Tesztadat bet\u00F6lt\u00E9se");
+		mntmImportTestData.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Manager.getInstance().generateTestData();
+
+				JOptionPane.showMessageDialog(getParent(), "Tesztadatok betöltve!");
+			}
+		});
+		mnImport.add(mntmImportTestData);
+
 		JMenuItem mntmrtkekMegjelentse = new JMenuItem("\u00C9rt\u00E9kek megjelen\u00EDt\u00E9se");
 		mntmrtkekMegjelentse.addActionListener(new ActionListener() {
 
@@ -114,6 +128,15 @@ public class MyFrame extends JFrame {
 		menuBar.add(mnMethods);
 
 		JMenuItem mnTryMethods = new JMenuItem("M\u00F3dszerek kipr\u00F3b\u00E1l\u00E1sa");
+		mnTryMethods.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				getContentPane().removeAll();
+				getContentPane().add(new MethodComponent());
+				pack();
+			}
+		});
 		mnMethods.add(mnTryMethods);
 
 		JMenuItem mnExportMethodsResult = new JMenuItem("M\u00F3dszerek eredm\u00E9nyeinek export\u00E1l\u00E1sa");

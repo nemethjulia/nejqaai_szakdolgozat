@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +67,13 @@ public class Manager {
 
 	public void setBVector(MySparseVector bVector) {
 		this.bVector = bVector;
+	}
+
+	public void generateTestData() {
+		matrix = MySparseMatrix.readFromFile(new File("src/test/matrix.txt"));
+		bVector = MySparseVector.readFromFile(new File("src/test/vector.txt"));
+		xVectors.add(MySparseVector.readFromFile(new File("src/test/vector.txt")));
+		xVectors.add(MySparseVector.readFromFile(new File("src/test/vector.txt")));
 	}
 
 }
