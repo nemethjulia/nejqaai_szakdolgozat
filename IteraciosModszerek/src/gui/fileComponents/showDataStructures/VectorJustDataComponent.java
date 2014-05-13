@@ -43,7 +43,7 @@ public class VectorJustDataComponent extends JPanel {
 
 		for (int i = 0; i < size; i++) {
 			VectorItem item = data.get(i);
-			JLabel label = new JLabel("[" + item.getIndex() + " | " + String.valueOf(item.getValue()) + "]");
+			JLabel label = new JLabel("[" + (item.getIndex() + 1) + " | " + String.valueOf(item.getValue()) + "]");
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.anchor = GridBagConstraints.CENTER;
 			gbc.insets = new Insets(0, 0, 0, 5);

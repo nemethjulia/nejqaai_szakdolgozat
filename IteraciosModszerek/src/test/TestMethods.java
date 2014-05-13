@@ -82,6 +82,7 @@ public class TestMethods {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+			Assert.assertFalse(true);
 		}
 	}
 
@@ -96,6 +97,7 @@ public class TestMethods {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+			Assert.assertFalse(true);
 		}
 	}
 
@@ -110,6 +112,7 @@ public class TestMethods {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+			Assert.assertFalse(true);
 		}
 	}
 
@@ -124,6 +127,7 @@ public class TestMethods {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+			Assert.assertFalse(true);
 		}
 	}
 }

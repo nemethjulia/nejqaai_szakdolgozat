@@ -41,7 +41,7 @@ public class MatrixJustDataComponent extends JPanel {
 
 		for (int i = 0; i < data.size(); i++) {
 			MatrixItem item = data.get(i);
-			JLabel label = new JLabel("[" + item.getRow() + ", " + item.getCol() + " | " + String.valueOf(item.getValue()) + "]");
+			JLabel label = new JLabel("[" + (item.getRow() + 1) + ", " + (item.getCol() + 1) + " | " + String.valueOf(item.getValue()) + "]");
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.anchor = GridBagConstraints.CENTER;
 			gbc.insets = new Insets(0, 0, 0, 5);

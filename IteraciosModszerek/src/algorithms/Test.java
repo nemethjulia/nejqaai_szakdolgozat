@@ -35,11 +35,12 @@ public class Test {
 		x.setValue(2, 1);
 		System.out.println(x);
 		JacobiMethod j = new JacobiMethod(30);
-		MySparseVector xn = j.solve(a, b, x);
-		System.out.println(xn);
+		MySparseVector mySparseVector = j.solve(a, b, x);
+		System.out.println(mySparseVector);
+
 		GaussSeidelMethod gs = new GaussSeidelMethod(30);
-		xn = gs.solve(a, b, x);
-		System.out.println(xn);
+		mySparseVector = gs.solve(a, b, x);
+		System.out.println(mySparseVector);
 
 	}
 

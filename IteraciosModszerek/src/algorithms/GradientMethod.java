@@ -5,8 +5,6 @@ import java.util.List;
 import datastructures.MatrixItem;
 import datastructures.MySparseMatrix;
 import datastructures.MySparseVector;
-import exceptions.IsNotPositiveDefinite;
-import exceptions.IsNotSymmetryc;
 
 /**
  * @author julcsi
@@ -19,20 +17,10 @@ public class GradientMethod extends Method {
 	}
 
 	@Override
-	protected void throwExceptions(MySparseMatrix a) throws Exception {
-		if (!a.isSymmetryc()) {
-			throw new IsNotSymmetryc("Nem szimmetrikus a mátrix!");
-		}
-		if (!a.isPositiveDefinite()) {
-			throw new IsNotPositiveDefinite("Nem pozitív definit a mátrix!");
-		}
-
-	}
-
-	@Override
-	public MySparseVector iterationStep(MySparseVector x, List<MatrixItem> m, MySparseVector b) {
+	public MySparseVector iterationStep(MySparseVector x, MySparseMatrix m, MySparseVector b) {
 		int n = x.getSize();
 		MySparseVector xnew = new MySparseVector(n);
+		List<MatrixItem> data = m.getData();
 
 		// rk eloallitasa rk=b-A*x(k-1)
 
@@ -43,7 +31,7 @@ public class GradientMethod extends Method {
 
 		MySparseVector rk = new MySparseVector(n);
 
-		for (MatrixItem i : m) {
+		for (MatrixItem i : data) {
 			if (i.getRow() != row) {
 				value = b.getValue(row) - rowsum;
 				rk.setValue(row, value);
@@ -76,7 +64,7 @@ public class GradientMethod extends Method {
 
 		MySparseVector current = new MySparseVector(n);
 
-		for (MatrixItem i : m) {
+		for (MatrixItem i : data) {
 			if (i.getRow() != row) {
 				current.setValue(row, rowsum);
 				row = i.getRow();
