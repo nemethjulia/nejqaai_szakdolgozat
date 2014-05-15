@@ -14,7 +14,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -67,7 +66,7 @@ public class ExportToFile extends JPanel {
 							dataToFile = vector.toFileFormat();
 							letsSave = true;
 						} else {
-							JOptionPane.showMessageDialog(getParent(), "Nem megfelelõ érték!");
+							manager.showMessage("Nem megfelelõ érték!");
 							letsSave = false;
 						}
 						break;

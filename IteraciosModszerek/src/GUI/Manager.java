@@ -84,7 +84,7 @@ public class Manager {
 		}
 	}
 
-	private void showMessage(String msg) {
+	public void showMessage(String msg) {
 		JOptionPane.showMessageDialog(frame, msg);
 	}
 

@@ -19,7 +19,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
@@ -198,8 +197,8 @@ public class MethodComponent extends JPanel {
 		}
 	}
 
-	public void showMessage(String msg) {
-		JOptionPane.showMessageDialog(this, msg);
+	private void showMessage(String msg) {
+		manager.showMessage(msg);
 	}
 
 	public void pack() {

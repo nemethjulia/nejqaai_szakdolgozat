@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class MyFrame extends JFrame {
 
@@ -45,9 +45,7 @@ public class MyFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Manager.getInstance().restartProcess();
-				getContentPane().removeAll();
-				getContentPane().add(new WelcomePanel());
-				pack();
+				loadPanel(new WelcomePanel());
 			}
 		});
 		mnFile.add(mntmNewProcess);
@@ -60,9 +58,7 @@ public class MyFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				getContentPane().removeAll();
-				getContentPane().add(new ImportEnteringValues());
-				pack();
+				loadPanel(new ImportEnteringValues());
 
 			}
 		});
@@ -73,9 +69,7 @@ public class MyFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				getContentPane().removeAll();
-				getContentPane().add(new ImportFromFilePanel());
-				pack();
+				loadPanel(new ImportFromFilePanel());
 			}
 		});
 		mnImport.add(mnFromFile);
@@ -87,7 +81,7 @@ public class MyFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Manager.getInstance().generateTestData();
 
-				JOptionPane.showMessageDialog(getParent(), "Tesztadatok betöltve!");
+				Manager.getInstance().showMessage("Tesztadatok betöltve!");
 			}
 		});
 		mnImport.add(mntmImportTestData);
@@ -97,9 +91,7 @@ public class MyFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				getContentPane().removeAll();
-				getContentPane().add(new ShowValues());
-				pack();
+				loadPanel(new ShowValues());
 			}
 		});
 		mnFile.add(mntmrtkekMegjelentse);
@@ -109,9 +101,7 @@ public class MyFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				getContentPane().removeAll();
-				getContentPane().add(new ExportToFile());
-				pack();
+				loadPanel(new ExportToFile());
 			}
 		});
 		mnFile.add(mntmSaveToFile);
@@ -133,9 +123,7 @@ public class MyFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				getContentPane().removeAll();
-				getContentPane().add(new MethodComponent());
-				pack();
+				loadPanel(new MethodComponent());
 			}
 		});
 		mnMethods.add(mnTryMethods);
@@ -148,5 +136,11 @@ public class MyFrame extends JFrame {
 
 		getContentPane().add(new WelcomePanel());
 
+	}
+
+	private void loadPanel(JPanel panel) {
+		getContentPane().removeAll();
+		getContentPane().add(panel);
+		pack();
 	}
 }

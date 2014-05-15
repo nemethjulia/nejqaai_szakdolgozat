@@ -13,7 +13,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -95,16 +94,6 @@ public class ImportFromFilePanel extends JPanel {
 							showMessage("Hiba a Fájlok beolvasásában!");
 						}
 						if (matrix != null) {
-							String msg = "Az alkalmazás a mátrix pozitív definitségét nem ellenõrzi!\n";
-							if (!matrix.isSymmetryc()) {
-								msg += "A mátrix nem szimmetrikus!\n";
-							}
-							if (!matrix.isDiagonalDominant()) {
-								msg += "A mátrix nem szigorúan diagonálisan domináns!\n";
-							}
-							msg += "Így a módszerek valószínûleg nem minden x0 vektorra fognak konvergálni.";
-
-							showMessage(msg);
 							Manager.getInstance().setMatrix(matrix);
 						}
 					}
@@ -142,6 +131,6 @@ public class ImportFromFilePanel extends JPanel {
 
 	private void showMessage(String msg) {
 
-		JOptionPane.showMessageDialog(this, msg);
+		Manager.getInstance().showMessage(msg);
 	}
 }

@@ -1,5 +1,6 @@
 package gui.methodComponents;
 
+import gui.Manager;
 import gui.fileComponents.showDataStructures.VectorComponent;
 import gui.fileComponents.showDataStructures.VectorJustDataComponent;
 
@@ -194,7 +195,7 @@ public class MethodResultPanel extends JPanel {
 				fw.write(dataToFile);
 				fw.close();
 			} catch (IOException e) {
-				((MethodComponent) getParent().getParent()).showMessage("Hiba a Fájl írása közben!");
+				Manager.getInstance().showMessage("Hiba a Fájl írása közben!");
 				e.printStackTrace();
 			}
 		}
@@ -216,7 +217,7 @@ public class MethodResultPanel extends JPanel {
 			try {
 				ChartUtilities.saveChartAsJPEG(chooser.getSelectedFile(), chart, 1200, 1200);
 			} catch (IOException e) {
-				((MethodComponent) getParent().getParent()).showMessage("Hiba a Fájl írása közben!");
+				Manager.getInstance().showMessage("Hiba a Fájl írása közben!");
 				e.printStackTrace();
 			}
 		}
@@ -238,7 +239,7 @@ public class MethodResultPanel extends JPanel {
 				fw.write(dataToFile);
 				fw.close();
 			} catch (IOException e) {
-				((MethodComponent) getParent().getParent()).showMessage("Hiba a Fájl írása közben!");
+				Manager.getInstance().showMessage("Hiba a Fájl írása közben!");
 				e.printStackTrace();
 			}
 		}
