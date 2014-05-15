@@ -17,7 +17,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -202,6 +201,6 @@ public class MethodComponent extends JPanel {
 	}
 
 	public void pack() {
-		((JFrame) getParent().getParent().getParent().getParent()).pack();
+		manager.getFrame().pack();
 	}
 }

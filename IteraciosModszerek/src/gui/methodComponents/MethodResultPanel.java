@@ -182,17 +182,13 @@ public class MethodResultPanel extends JPanel {
 	}
 
 	private void saveXnVector() {
-		String dataToFile = new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "-n exportált " + getMethodName() + " számolt eredményvektor: \n";
-		dataToFile += "Vektor mérete: " + xn.toFileFormat() + "\n";
-		dataToFile += "Ebbõl a fájlból nem olvasható vissza a vektor a programba.";
-
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT", "txt");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showSaveDialog(getParent());
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			try (FileWriter fw = new FileWriter(chooser.getSelectedFile() + ".txt")) {
-				fw.write(dataToFile);
+				fw.write(xn.toFileFormat());
 				fw.close();
 			} catch (IOException e) {
 				Manager.getInstance().showMessage("Hiba a Fájl írása közben!");
@@ -205,7 +201,7 @@ public class MethodResultPanel extends JPanel {
 		removeAll();
 		makePanel(xn);
 
-		((MethodComponent) getParent().getParent()).pack();
+		Manager.getInstance().getFrame().pack();
 	}
 
 	private void savePicture(JFreeChart chart) {
