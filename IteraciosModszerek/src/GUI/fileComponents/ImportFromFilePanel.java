@@ -37,6 +37,8 @@ public class ImportFromFilePanel extends JPanel {
 	private String vectorDescription = "vector";
 	private String matrixDescription = "matrix";
 
+	private String lastPath = null;
+
 	public ImportFromFilePanel() {
 		setBorder(null);
 
@@ -61,7 +63,12 @@ public class ImportFromFilePanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				JFileChooser chooser = new JFileChooser();
+				JFileChooser chooser;
+				if (lastPath != null) {
+					chooser = new JFileChooser(lastPath);
+				} else {
+					chooser = new JFileChooser();
+				}
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT", "txt");
 				chooser.setFileFilter(filter);
 				int returnVal = chooser.showOpenDialog(getParent());
@@ -101,6 +108,7 @@ public class ImportFromFilePanel extends JPanel {
 							Manager.getInstance().setMatrix(matrix);
 						}
 					}
+					lastPath = chooser.getSelectedFile().getAbsolutePath();
 				}
 			}
 
