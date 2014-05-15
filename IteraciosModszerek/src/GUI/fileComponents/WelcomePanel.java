@@ -32,7 +32,7 @@ public class WelcomePanel extends JPanel {
 		txtWelcomeText.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtWelcomeText.setEditable(false);
 		txtWelcomeText.setHorizontalAlignment(SwingConstants.CENTER);
-		txtWelcomeText.setText("Iter\u00E1ci\u00F3s m\u00F3dszerek implement\u00E1l\u00E1sa nagym\u00E9ret\u0171 m\u00E1trixra");
+		txtWelcomeText.setText("Iter\u00E1ci\u00F3s m\u00F3dszerek implement\u00E1l\u00E1sa nagym\u00E9ret\u0171 ritka m\u00E1trixokra");
 		txtWelcomeText.setColumns(10);
 
 		BufferedImage myPicture = null;

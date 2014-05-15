@@ -91,7 +91,7 @@ public class MyFrame extends JFrame {
 		});
 		mnImport.add(mntmImportTestData);
 
-		JMenuItem mntmrtkekMegjelentse = new JMenuItem("\u00C9rt\u00E9kek megjelen\u00EDt\u00E9se");
+		JMenuItem mntmrtkekMegjelentse = new JMenuItem("Aktu\u00E1lis adatok megjelen\u00EDt\u00E9se");
 		mntmrtkekMegjelentse.addActionListener(new ActionListener() {
 
 			@Override

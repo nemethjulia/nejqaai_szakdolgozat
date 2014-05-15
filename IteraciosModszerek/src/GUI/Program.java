@@ -16,6 +16,7 @@ public class Program {
 
 	private static void createAndShowGUI() {
 		MyFrame frame = new MyFrame();
+		Manager.getInstance().setFrame(frame);
 		frame.pack();
 		frame.setVisible(true);
 	}

@@ -12,6 +12,7 @@ public abstract class Method {
 
 	public List<Double> residumNorms;
 	public List<Double> qs;
+	public int lastStepNumber;
 
 	public Method(int numberOfSteps) {
 		this.numberOfSteps = numberOfSteps;
@@ -23,6 +24,8 @@ public abstract class Method {
 		qs = new ArrayList<Double>();
 		List<MySparseVector> xns = new ArrayList<MySparseVector>();
 		MySparseVector x = x0.clone();
+		MySparseVector resVector = b.substract(a.multiple(x));
+		residumNorms.add(resVector.norm());
 		xns.add(x);
 		int i = 0;
 		boolean needMoreStep = true;
@@ -30,20 +33,26 @@ public abstract class Method {
 			x = iterationStep(x, a, b);
 			xns.add(x);
 
-			MySparseVector resVector = b.substract(a.multiple(x));
+			resVector = b.substract(a.multiple(x));
 			residumNorms.add(resVector.norm());
 			if (i > 2) {
-				double q = x.substract(xns.get(i - 1)).norm() / xns.get(i - 1).substract(xns.get(i - 2)).norm();
-				qs.add(q);
-			}
-			/*
-			 * TODO valamit ide kitalálni
-			 */
-			if (!needMoreStep) {
-				needMoreStep = false;
+				xns.remove(0);
+				double szamlalo = x.substract(xns.get(1)).norm();
+				double nevezo = xns.get(1).substract(xns.get(0)).norm();
+				if (nevezo == 0.0) {
+					needMoreStep = false;
+				} else {
+					double q = szamlalo / nevezo;
+					qs.add(q);
+					if (i > 5 && q > 5) {
+						needMoreStep = false;
+						lastStepNumber = i + 1;
+					}
+				}
 			}
 			++i;
 		}
+		lastStepNumber = i;
 
 		return x;
 	}

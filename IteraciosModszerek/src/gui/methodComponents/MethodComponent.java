@@ -3,6 +3,7 @@ package gui.methodComponents;
 import gui.Manager;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -82,11 +83,14 @@ public class MethodComponent extends JPanel {
 		stepNumberField.setColumns(10);
 
 		x0ComboBox = new JComboBox<String>();
+		x0ComboBox.setMaximumRowCount(10);
+
 		String[] x0Strings = manager.getxVectorsString();
 		x0ComboBox.setModel(new DefaultComboBoxModel<String>(x0Strings));
 		if (x0Strings.length > 0) {
 			x0ComboBox.setSelectedIndex(0);
 		}
+		x0ComboBox.setPreferredSize(new Dimension(180, 30));
 
 		JButton startProcessButton = new JButton("M\u00F3dszer(ek) ind\u00EDt\u00E1sa");
 		startProcessButton.addActionListener(new ActionListener() {
@@ -123,13 +127,13 @@ public class MethodComponent extends JPanel {
 																				gl_filterPanel
 																						.createSequentialGroup()
 																						.addGroup(
-																								gl_filterPanel.createParallelGroup(Alignment.TRAILING, false).addComponent(x0ComboBox, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																										.addGroup(Alignment.LEADING, gl_filterPanel.createSequentialGroup().addComponent(stepNumber, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(stepNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))).addGap(78)
+																								gl_filterPanel.createParallelGroup(Alignment.LEADING, false).addComponent(x0ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																										.addGroup(gl_filterPanel.createSequentialGroup().addComponent(stepNumber, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(stepNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))).addGap(78)
 																						.addGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addComponent(boxGaussSeidel).addComponent(boxJacobi)).addGap(74).addGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addComponent(boxGradiens).addComponent(boxKonjugaltGradiens))).addComponent(lblKremVlasszonAz, GroupLayout.PREFERRED_SIZE, 700, GroupLayout.PREFERRED_SIZE)))
-										.addGroup(gl_filterPanel.createSequentialGroup().addGap(220).addComponent(startProcessButton))).addContainerGap(48, Short.MAX_VALUE)));
+										.addGroup(gl_filterPanel.createSequentialGroup().addGap(220).addComponent(startProcessButton))).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		gl_filterPanel.setVerticalGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addGroup(
 				gl_filterPanel.createSequentialGroup().addContainerGap().addComponent(lblKremVlasszonAz, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addGap(18).addGroup(gl_filterPanel.createParallelGroup(Alignment.BASELINE).addComponent(stepNumber, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addComponent(stepNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(boxJacobi).addComponent(boxGradiens)).addGap(18)
-						.addGroup(gl_filterPanel.createParallelGroup(Alignment.BASELINE).addComponent(x0ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(boxGaussSeidel).addComponent(boxKonjugaltGradiens)).addGap(18).addComponent(startProcessButton).addContainerGap(25, Short.MAX_VALUE)));
+						.addGroup(gl_filterPanel.createParallelGroup(Alignment.BASELINE).addComponent(x0ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(boxGaussSeidel).addComponent(boxKonjugaltGradiens)).addGap(18).addComponent(startProcessButton).addContainerGap(19, Short.MAX_VALUE)));
 		filterPanel.setLayout(gl_filterPanel);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -169,6 +173,7 @@ public class MethodComponent extends JPanel {
 							if (!(jacobiKell || gSKell || gradiensKell || kGradiensKell)) {
 								showMessage("Nem megfelelõ érték: Nincs kiválasztva módszer!");
 							} else {
+								tabbedPane.removeAll();
 								if (jacobiKell) {
 									tabbedPane.addTab("Jacobi iteráció", new MethodResultPanel(new JacobiMethod(stepNumber), a, b, x));
 								}
@@ -181,6 +186,8 @@ public class MethodComponent extends JPanel {
 								if (kGradiensKell) {
 									tabbedPane.addTab("Konjugált Gradiens módszer", new MethodResultPanel(new ConjugateGradientMethod(stepNumber), a, b, x));
 								}
+
+								pack();
 							}
 						}
 					}
@@ -189,10 +196,13 @@ public class MethodComponent extends JPanel {
 		} catch (NumberFormatException ex) {
 			showMessage("Nem megfelelõ érték: Lépések száma!");
 		}
-		((JFrame) getParent().getParent().getParent().getParent()).pack();
 	}
 
-	private void showMessage(String msg) {
+	public void showMessage(String msg) {
 		JOptionPane.showMessageDialog(this, msg);
+	}
+
+	public void pack() {
+		((JFrame) getParent().getParent().getParent().getParent()).pack();
 	}
 }

@@ -221,36 +221,26 @@ public class MySparseMatrix {
 		return result;
 	}
 
-	public static MySparseMatrix readFromFile(File file) {
-		try {
-			return readFromFile(new BufferedReader(new FileReader(file)));
-		} catch (IOException e) {
-			return null;
-		}
+	public static MySparseMatrix readFromFile(File file) throws NumberFormatException, IOException {
+		return readFromFile(new BufferedReader(new FileReader(file)));
 	}
 
-	public static MySparseMatrix readFromFile(BufferedReader reader) {
+	public static MySparseMatrix readFromFile(BufferedReader reader) throws NumberFormatException, IOException {
 		MySparseMatrix matrix = null;
 
-		try {
-			String line = reader.readLine();
-			if (line != null) {
-				matrix = new MySparseMatrix(Integer.parseInt(line));
-				line = reader.readLine();
-				while (line != null) {
-					String[] arr = line.split(",");
-					if (arr.length == 3) {
-						matrix.setValue(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Double.parseDouble(arr[2]));
-					} else {
-						return matrix;
-					}
-					line = reader.readLine();
+		String line = reader.readLine();
+		if (line != null) {
+			matrix = new MySparseMatrix(Integer.parseInt(line));
+			line = reader.readLine();
+			while (line != null) {
+				String[] arr = line.split(",");
+				if (arr.length == 3) {
+					matrix.setValue(Integer.parseInt(arr[0]) - 1, Integer.parseInt(arr[1]) - 1, Double.parseDouble(arr[2]));
+				} else {
+					return matrix;
 				}
+				line = reader.readLine();
 			}
-		} catch (NumberFormatException e) {
-			return null;
-		} catch (IOException e) {
-			// do nothing
 		}
 		return matrix;
 	}

@@ -5,6 +5,7 @@ import gui.Manager;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -66,7 +67,12 @@ public class ImportFromFilePanel extends JPanel {
 				int returnVal = chooser.showOpenDialog(getParent());
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					if (comboBoxDataStructure.getSelectedIndex() == 0) {
-						MySparseVector vector = MySparseVector.readFromFile(chooser.getSelectedFile());
+						MySparseVector vector = null;
+						try {
+							vector = MySparseVector.readFromFile(chooser.getSelectedFile());
+						} catch (NumberFormatException | IOException e) {
+							showMessage("Hiba a Fájlok beolvasásában!");
+						}
 						if (vector != null) {
 							if (comboBoxVectorStatus.getSelectedIndex() == 0) {
 								Manager.getInstance().addXVector(vector);
@@ -75,7 +81,12 @@ public class ImportFromFilePanel extends JPanel {
 							}
 						}
 					} else if (comboBoxDataStructure.getSelectedIndex() == 1) {
-						MySparseMatrix matrix = MySparseMatrix.readFromFile(chooser.getSelectedFile());
+						MySparseMatrix matrix = null;
+						try {
+							matrix = MySparseMatrix.readFromFile(chooser.getSelectedFile());
+						} catch (NumberFormatException | IOException e) {
+							showMessage("Hiba a Fájlok beolvasásában!");
+						}
 						if (matrix != null) {
 							String msg = "Az alkalmazás a mátrix pozitív definitségét nem ellenõrzi!\n";
 							if (!matrix.isSymmetryc()) {

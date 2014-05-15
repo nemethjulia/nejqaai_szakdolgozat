@@ -111,36 +111,27 @@ public class MySparseVector {
 			throw new IndexOutOfBoundsException();
 	}
 
-	public static MySparseVector readFromFile(File file) {
-		try {
-			return readFromFile(new BufferedReader(new FileReader(file)));
-		} catch (IOException e) {
-			return null;
-		}
+	public static MySparseVector readFromFile(File file) throws NumberFormatException, IOException {
+		return readFromFile(new BufferedReader(new FileReader(file)));
+
 	}
 
-	public static MySparseVector readFromFile(BufferedReader reader) {
+	public static MySparseVector readFromFile(BufferedReader reader) throws NumberFormatException, IOException {
 		MySparseVector vector = null;
 
-		try {
-			String line = reader.readLine();
-			if (line != null) {
-				vector = new MySparseVector(Integer.parseInt(line));
-				line = reader.readLine();
-				while (line != null) {
-					String[] arr = line.split(",");
-					if (arr.length == 2) {
-						vector.setValue(Integer.parseInt(arr[0]), Double.parseDouble(arr[1]));
-					} else {
-						return vector;
-					}
-					line = reader.readLine();
+		String line = reader.readLine();
+		if (line != null) {
+			vector = new MySparseVector(Integer.parseInt(line));
+			line = reader.readLine();
+			while (line != null) {
+				String[] arr = line.split(",");
+				if (arr.length == 2) {
+					vector.setValue(Integer.parseInt(arr[0]) - 1, Double.parseDouble(arr[1]));
+				} else {
+					return vector;
 				}
+				line = reader.readLine();
 			}
-		} catch (NumberFormatException e) {
-			return null;
-		} catch (IOException e) {
-			// do nothing
 		}
 		return vector;
 	}
@@ -191,7 +182,7 @@ public class MySparseVector {
 
 		int thisI = 0;
 		int otherI = 0;
-		while (thisI < data.size() || otherI < otherData.size()) {
+		while (thisI < data.size() && otherI < otherData.size()) {
 			VectorItem thisItem = data.get(thisI);
 			VectorItem otherItem = otherData.get(otherI);
 
