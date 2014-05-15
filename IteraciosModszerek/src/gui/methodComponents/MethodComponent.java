@@ -100,6 +100,9 @@ public class MethodComponent extends JPanel {
 				startProcess();
 			}
 		});
+		if (!manager.hasGoodData()) { // ha az adatok nem jók, akkor nem lehet elkezdeni a folyamatot
+			startProcessButton.setEnabled(false);
+		}
 
 		boxJacobi = new JCheckBox("Jacobi iter\u00E1ci\u00F3");
 
@@ -159,40 +162,37 @@ public class MethodComponent extends JPanel {
 				if (x.getSize() != b.getSize()) {
 					showMessage("Nem megfelelõ érték: A kezdõ- és jobboldali vektorok mérete nem egyezik!");
 				} else {
-					if (x.getSize() != a.getSize()) {
-						showMessage("Nem megfelelõ érték: A kezdõvektor és a mátrix mérete nem egyezik!");
+					int stepNumber = Integer.parseInt(stepNumberField.getText());
+					if (stepNumber <= 0) {
+						showMessage("Nem megfelelõ érték: Lépések száma!");
 					} else {
-						int stepNumber = Integer.parseInt(stepNumberField.getText());
-						if (stepNumber <= 0) {
-							showMessage("Nem megfelelõ érték: Lépések száma!");
+						boolean jacobiKell = boxJacobi.isSelected();
+						boolean gSKell = boxGaussSeidel.isSelected();
+						boolean gradiensKell = boxGradiens.isSelected();
+						boolean kGradiensKell = boxKonjugaltGradiens.isSelected();
+						if (!(jacobiKell || gSKell || gradiensKell || kGradiensKell)) {
+							showMessage("Nem megfelelõ érték: Nincs kiválasztva módszer!");
 						} else {
-							boolean jacobiKell = boxJacobi.isSelected();
-							boolean gSKell = boxGaussSeidel.isSelected();
-							boolean gradiensKell = boxGradiens.isSelected();
-							boolean kGradiensKell = boxKonjugaltGradiens.isSelected();
-							if (!(jacobiKell || gSKell || gradiensKell || kGradiensKell)) {
-								showMessage("Nem megfelelõ érték: Nincs kiválasztva módszer!");
-							} else {
-								tabbedPane.removeAll();
-								if (jacobiKell) {
-									tabbedPane.addTab("Jacobi iteráció", new MethodResultPanel(new JacobiMethod(stepNumber), a, b, x));
-								}
-								if (gSKell) {
-									tabbedPane.addTab("Gauss-Seidel iteráció", new MethodResultPanel(new GaussSeidelMethod(stepNumber), a, b, x));
-								}
-								if (gradiensKell) {
-									tabbedPane.addTab("Gradiens módszer", new MethodResultPanel(new GradientMethod(stepNumber), a, b, x));
-								}
-								if (kGradiensKell) {
-									tabbedPane.addTab("Konjugált Gradiens módszer", new MethodResultPanel(new ConjugateGradientMethod(stepNumber), a, b, x));
-								}
-
-								pack();
+							tabbedPane.removeAll();
+							if (jacobiKell) {
+								tabbedPane.addTab("Jacobi iteráció", new MethodResultPanel(new JacobiMethod(stepNumber), a, b, x));
 							}
+							if (gSKell) {
+								tabbedPane.addTab("Gauss-Seidel iteráció", new MethodResultPanel(new GaussSeidelMethod(stepNumber), a, b, x));
+							}
+							if (gradiensKell) {
+								tabbedPane.addTab("Gradiens módszer", new MethodResultPanel(new GradientMethod(stepNumber), a, b, x));
+							}
+							if (kGradiensKell) {
+								tabbedPane.addTab("Konjugált Gradiens módszer", new MethodResultPanel(new ConjugateGradientMethod(stepNumber), a, b, x));
+							}
+
+							pack();
 						}
 					}
 				}
 			}
+
 		} catch (NumberFormatException ex) {
 			showMessage("Nem megfelelõ érték: Lépések száma!");
 		}

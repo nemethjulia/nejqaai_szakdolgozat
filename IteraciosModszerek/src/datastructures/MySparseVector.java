@@ -49,7 +49,7 @@ public class MySparseVector {
 		return x;
 	}
 
-	public void setValue(int index, double value) {
+	public void setValue(int index, double value) throws IndexOutOfBoundsException {
 		if (value != 0.0) {
 			checkIndex(index);
 			for (int i = 0; i < data.size(); ++i) {
@@ -106,7 +106,7 @@ public class MySparseVector {
 		return x;
 	}
 
-	private final void checkIndex(int index) {
+	private final void checkIndex(int index) throws IndexOutOfBoundsException {
 		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException();
 	}

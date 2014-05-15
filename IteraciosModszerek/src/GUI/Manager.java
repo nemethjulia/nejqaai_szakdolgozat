@@ -80,8 +80,12 @@ public class Manager {
 			xVectors.add(MySparseVector.readFromFile(new File("src/test/01/01x01vector.txt")));
 			xVectors.add(MySparseVector.readFromFile(new File("src/test/01/01x02vector.txt")));
 		} catch (NumberFormatException | IOException e) {
-			JOptionPane.showMessageDialog(frame, "Hiba a Fájlok beolvasásában!");
+			showMessage("Hiba a Fájlok beolvasásában!");
 		}
+	}
+
+	private void showMessage(String msg) {
+		JOptionPane.showMessageDialog(frame, msg);
 	}
 
 	public MyFrame getFrame() {
@@ -90,6 +94,23 @@ public class Manager {
 
 	public void setFrame(MyFrame frame) {
 		this.frame = frame;
+	}
+
+	public boolean hasGoodData() {
+		if (!(xVectors.size() > 0)) {
+			showMessage("Nincs betöltve kezdõvektor!");
+			return false;
+		} else if (matrix.getSize() == 0) {
+			showMessage("Nincs betöltve mátrix!");
+			return false;
+		} else if (bVector.getSize() == 0) {
+			showMessage("Nincs betöltve jobboldali vektor!");
+			return false;
+		} else if (bVector.getSize() != matrix.getSize()) {
+			showMessage("Nem megfelelõ érték: A jobboldali vektor és a mátrix mérete nem egyezik!");
+			return false;
+		}
+		return true;
 	}
 
 }

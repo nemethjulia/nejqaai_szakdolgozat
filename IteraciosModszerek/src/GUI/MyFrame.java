@@ -31,6 +31,7 @@ public class MyFrame extends JFrame {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Iter\u00E1ci\u00F3s M\u00F3dszerek");
+		// setAlwaysOnTop(true);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -138,9 +139,6 @@ public class MyFrame extends JFrame {
 			}
 		});
 		mnMethods.add(mnTryMethods);
-
-		JMenuItem mnExportMethodsResult = new JMenuItem("M\u00F3dszerek eredm\u00E9nyeinek export\u00E1l\u00E1sa");
-		mnMethods.add(mnExportMethodsResult);
 
 		JMenu mnHelp = new JMenu("S\u00FAg\u00F3");
 		menuBar.add(mnHelp);
