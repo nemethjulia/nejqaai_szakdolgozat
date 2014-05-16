@@ -85,7 +85,7 @@ public class MethodResultPanel extends JPanel {
 
 		JPanel panel = new JPanel();
 		add(panel);
-		panel.setLayout(new FormLayout(new ColumnSpec[] { FormFactory.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("500px:grow"), }, new RowSpec[] { FormFactory.LINE_GAP_ROWSPEC, RowSpec.decode("80px"), FormFactory.LINE_GAP_ROWSPEC, RowSpec.decode("30px:grow"), FormFactory.LINE_GAP_ROWSPEC, RowSpec.decode("30px"), FormFactory.LINE_GAP_ROWSPEC, RowSpec.decode("30px"), }));
+		panel.setLayout(new FormLayout(new ColumnSpec[] { FormFactory.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("500px:grow"), }, new RowSpec[] { FormFactory.LINE_GAP_ROWSPEC, RowSpec.decode("80px"), FormFactory.LINE_GAP_ROWSPEC, RowSpec.decode("30px:grow"), FormFactory.LINE_GAP_ROWSPEC, RowSpec.decode("30px"), FormFactory.LINE_GAP_ROWSPEC, RowSpec.decode("30px"), FormFactory.LINE_GAP_ROWSPEC, RowSpec.decode("30px"), }));
 
 		JTabbedPane xVectorArea = new JTabbedPane();
 		resultVectorComponent = new VectorComponent(xn);
@@ -116,6 +116,7 @@ public class MethodResultPanel extends JPanel {
 			}
 		});
 		panel.add(exportXButton, "2, 6, center, center");
+
 		JButton runMoreButton = new JButton("Iteráció folytatása");
 		runMoreButton.addActionListener(new ActionListener() {
 			@Override
@@ -125,6 +126,17 @@ public class MethodResultPanel extends JPanel {
 		});
 		runMoreButton.setToolTipText("Iteráció folytatása az eredményvektorral, mint kezdõvektor");
 		panel.add(runMoreButton, "2, 8, center, center");
+
+		JButton saveResultVectorButton = new JButton("Eredményvektor tárolása a kezdõvektorok közé");
+		saveResultVectorButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Manager manager = Manager.getInstance();
+				manager.addXVector(xn);
+				manager.showMessage("A vektor elmentve. Kérem, töltse be újra az oldalt!\n(Módszerek -> Módszerek kipróbálása)");
+			}
+		});
+		panel.add(saveResultVectorButton, "2, 10, center, center");
 	}
 
 	private JPanel createChart(final List<Double> doubles, final String title, final String categoryAxisLabel, final String valueAxisLabel, final int firstStep) {
