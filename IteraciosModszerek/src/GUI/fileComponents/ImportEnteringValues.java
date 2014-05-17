@@ -51,7 +51,7 @@ public class ImportEnteringValues extends JPanel {
 
 		JTextField textAsking = new JTextField();
 		textAsking.setHorizontalAlignment(SwingConstants.CENTER);
-		textAsking.setText("K\u00E9rem, v\u00E1lassza ki a beolvasand\u00F3 adatt\u00EDpust!");
+		textAsking.setText("K\u00E9rem, adja meg az adatokat!");
 		textAsking.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textAsking.setEditable(false);
 		textAsking.setColumns(30);
@@ -59,7 +59,7 @@ public class ImportEnteringValues extends JPanel {
 		comboBoxVectorStatus = new JComboBox<String>();
 		comboBoxVectorStatus.setModel(new DefaultComboBoxModel<String>(new String[] { "Egy X0 kezdõvektor", "A b jobboldali vektor" }));
 		comboBoxVectorStatus.setSelectedIndex(0);
-		btnImport = new JButton("Beolvas\u00E1s");
+		btnImport = new JButton("Folytat\u00E1s");
 		btnImport.addActionListener(new ActionListener() {
 
 			@Override
@@ -248,46 +248,42 @@ public class ImportEnteringValues extends JPanel {
 		});
 
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
-				groupLayout
-						.createSequentialGroup()
-						.addGroup(
-								groupLayout
-										.createParallelGroup(Alignment.LEADING)
-										.addGroup(
-												groupLayout
-														.createSequentialGroup()
-														.addContainerGap()
-														.addGroup(
-																groupLayout
-																		.createParallelGroup(Alignment.LEADING)
-																		.addComponent(textAsking, GroupLayout.PREFERRED_SIZE, 580, GroupLayout.PREFERRED_SIZE)
-																		.addGroup(
-																				groupLayout
-																						.createSequentialGroup()
-																						.addGroup(
-																								groupLayout
-																										.createParallelGroup(Alignment.LEADING)
-																										.addGroup(
-																												groupLayout
-																														.createSequentialGroup()
-																														.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lblRow, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE).addComponent(labelCol, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE).addComponent(lblSize, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-																														.addPreferredGap(ComponentPlacement.RELATED)
-																														.addGroup(
-																																groupLayout.createParallelGroup(Alignment.LEADING).addComponent(colField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(rowField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(sizeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																																		.addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)))
-																										.addGroup(groupLayout.createSequentialGroup().addComponent(labelValue, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(valueField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-																						.addPreferredGap(ComponentPlacement.RELATED)
-																						.addGroup(
-																								groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGap(63).addGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addComponent(buttonAddSize, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE).addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)))
-																										.addGroup(groupLayout.createSequentialGroup().addGap(169).addComponent(btnImport, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)))))).addGroup(groupLayout.createSequentialGroup().addGap(137).addComponent(btnDone))).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		groupLayout.setHorizontalGroup(groupLayout
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						groupLayout
+								.createSequentialGroup()
+								.addGap(160)
+								.addGroup(
+										groupLayout
+												.createParallelGroup(Alignment.LEADING)
+												.addComponent(textAsking, GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+												.addGroup(
+														groupLayout
+																.createSequentialGroup()
+																.addGroup(
+																		groupLayout
+																				.createParallelGroup(Alignment.LEADING)
+																				.addGroup(
+																						groupLayout
+																								.createSequentialGroup()
+																								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lblRow, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE).addComponent(labelCol, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE).addComponent(lblSize, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+																								.addPreferredGap(ComponentPlacement.RELATED)
+																								.addGroup(
+																										groupLayout.createParallelGroup(Alignment.LEADING).addComponent(colField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(rowField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(sizeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																												.addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))).addGroup(groupLayout.createSequentialGroup().addComponent(labelValue, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(valueField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+																				.addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addGroup(
+																		groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGap(63).addGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addComponent(buttonAddSize, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE).addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)))
+																				.addGroup(groupLayout.createSequentialGroup().addGap(169).addComponent(btnImport, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))))).addGap(160)).addGroup(groupLayout.createSequentialGroup().addGap(335).addComponent(btnDone).addContainerGap(510, Short.MAX_VALUE)));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
-				groupLayout.createSequentialGroup().addGap(5).addComponent(textAsking, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE).addGap(18).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED)
+				groupLayout.createSequentialGroup().addGap(20).addComponent(textAsking, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE).addGap(18).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnImport).addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)).addGap(30)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblSize, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addComponent(sizeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(buttonAddSize, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)).addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblRow, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addComponent(rowField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)).addGap(9)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(labelCol, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addComponent(colField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)).addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(labelValue, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addComponent(valueField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)).addGap(18).addComponent(btnDone).addContainerGap(16, Short.MAX_VALUE)));
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(labelValue, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addComponent(valueField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(buttonAdd, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)).addGap(18).addComponent(btnDone).addContainerGap(109, Short.MAX_VALUE)));
 		setLayout(groupLayout);
 
 		startStatus();

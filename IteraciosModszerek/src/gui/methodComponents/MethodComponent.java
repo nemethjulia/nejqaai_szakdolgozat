@@ -11,6 +11,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -20,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
@@ -54,25 +56,23 @@ public class MethodComponent extends JPanel {
 		manager = Manager.getInstance();
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 25, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.columnWidths = new int[] { 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 400 };
+		gridBagLayout.columnWeights = new double[] { Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		JPanel filterPanel = new JPanel();
 		filterPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_filterPanel = new GridBagConstraints();
 		gbc_filterPanel.insets = new Insets(0, 0, 5, 0);
-		gbc_filterPanel.gridwidth = 7;
-		gbc_filterPanel.gridheight = 7;
 		gbc_filterPanel.fill = GridBagConstraints.BOTH;
 		gbc_filterPanel.gridx = 0;
 		gbc_filterPanel.gridy = 0;
 		add(filterPanel, gbc_filterPanel);
 
 		JLabel lblKremVlasszonAz = new JLabel("K\u00E9rem, v\u00E1lasszon az al\u00E1bbi lehet\u0151s\u00E9gekb\u0151l!");
-		lblKremVlasszonAz.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblKremVlasszonAz.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblKremVlasszonAz.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel stepNumber = new JLabel("L\u00E9p\u00E9ssz\u00E1m: ");
@@ -110,6 +110,8 @@ public class MethodComponent extends JPanel {
 
 		boxKonjugaltGradiens = new JCheckBox("Konjug\u00E1lt Gradiens m\u00F3dszer");
 
+		JPanel panel = new JPanel();
+
 		GroupLayout gl_filterPanel = new GroupLayout(filterPanel);
 		gl_filterPanel.setHorizontalGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addGroup(
 				gl_filterPanel
@@ -117,33 +119,50 @@ public class MethodComponent extends JPanel {
 						.addGroup(
 								gl_filterPanel
 										.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_filterPanel.createSequentialGroup().addGap(193).addComponent(lblKremVlasszonAz, GroupLayout.PREFERRED_SIZE, 700, GroupLayout.PREFERRED_SIZE))
 										.addGroup(
 												gl_filterPanel
 														.createSequentialGroup()
-														.addGap(50)
 														.addGroup(
 																gl_filterPanel
 																		.createParallelGroup(Alignment.LEADING)
 																		.addGroup(
 																				gl_filterPanel
 																						.createSequentialGroup()
+																						.addGap(50)
 																						.addGroup(
 																								gl_filterPanel.createParallelGroup(Alignment.LEADING, false).addComponent(x0ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 																										.addGroup(gl_filterPanel.createSequentialGroup().addComponent(stepNumber, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(stepNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))).addGap(78)
-																						.addGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addComponent(boxGaussSeidel).addComponent(boxJacobi)).addGap(74).addGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addComponent(boxGradiens).addComponent(boxKonjugaltGradiens))).addComponent(lblKremVlasszonAz, GroupLayout.PREFERRED_SIZE, 700, GroupLayout.PREFERRED_SIZE)))
-										.addGroup(gl_filterPanel.createSequentialGroup().addGap(220).addComponent(startProcessButton))).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+																						.addGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addComponent(boxGaussSeidel).addComponent(boxJacobi)).addGap(74).addGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addComponent(boxGradiens).addComponent(boxKonjugaltGradiens))).addGroup(gl_filterPanel.createSequentialGroup().addGap(220).addComponent(startProcessButton))).addGap(29)
+														.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))).addContainerGap(28, Short.MAX_VALUE)));
 		gl_filterPanel.setVerticalGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addGroup(
-				gl_filterPanel.createSequentialGroup().addContainerGap().addComponent(lblKremVlasszonAz, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addGap(18).addGroup(gl_filterPanel.createParallelGroup(Alignment.BASELINE).addComponent(stepNumber, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addComponent(stepNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(boxJacobi).addComponent(boxGradiens)).addGap(18)
-						.addGroup(gl_filterPanel.createParallelGroup(Alignment.BASELINE).addComponent(x0ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(boxGaussSeidel).addComponent(boxKonjugaltGradiens)).addGap(18).addComponent(startProcessButton).addContainerGap(19, Short.MAX_VALUE)));
+				gl_filterPanel
+						.createSequentialGroup()
+						.addGap(19)
+						.addComponent(lblKremVlasszonAz, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(
+								gl_filterPanel
+										.createParallelGroup(Alignment.LEADING)
+										.addGroup(
+												gl_filterPanel.createSequentialGroup().addGroup(gl_filterPanel.createParallelGroup(Alignment.BASELINE).addComponent(stepNumber, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addComponent(stepNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(boxJacobi).addComponent(boxGradiens)).addGap(18)
+														.addGroup(gl_filterPanel.createParallelGroup(Alignment.BASELINE).addComponent(x0ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(boxGaussSeidel).addComponent(boxKonjugaltGradiens)).addGap(18).addComponent(startProcessButton)).addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)).addContainerGap(36, Short.MAX_VALUE)));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+
+		JTextArea txtrAProgramNem = new JTextArea();
+		txtrAProgramNem.setFont(new Font("Monospaced", Font.PLAIN, 12));
+		txtrAProgramNem.setText(" A program nem ellen\u0151rzi, hogy az egy\u00FCtthat\u00F3m\u00E1trixra\r\n jellemz\u0151ek-e a k\u00FCl\u00F6nb\u00F6z\u0151 m\u00F3dszerek konvergenci\u00E1j\u00E1hoz \r\n sz\u00FCks\u00E9ges \u00E9s el\u00E9gs\u00E9ges felt\u00E9telek (azaz, hogy minden\r\n kezd\u0151vektorra konverg\u00E1ljanak a megold\u00E1svektorhoz),\r\n \u00EDgy szimmetrikus, pozit\u00EDv definit, esetleg szigor\u00FAan\r\n diagon\u00E1lisan domin\u00E1ns. ");
+		txtrAProgramNem.setEnabled(false);
+		txtrAProgramNem.setEditable(false);
+		panel.add(txtrAProgramNem);
 		filterPanel.setLayout(gl_filterPanel);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
-		gbc_tabbedPane.gridwidth = 7;
 		gbc_tabbedPane.insets = new Insets(0, 0, 0, 5);
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
 		gbc_tabbedPane.gridx = 0;
-		gbc_tabbedPane.gridy = 7;
+		gbc_tabbedPane.gridy = 1;
 		add(tabbedPane, gbc_tabbedPane);
 
 	}

@@ -7,6 +7,7 @@ import gui.fileComponents.ShowValues;
 import gui.fileComponents.WelcomePanel;
 import gui.methodComponents.MethodComponent;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,6 +33,7 @@ public class MyFrame extends JFrame {
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Iter\u00E1ci\u00F3s M\u00F3dszerek");
 		// setAlwaysOnTop(true);
+		setMinimumSize(new Dimension(1200, 700));
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
