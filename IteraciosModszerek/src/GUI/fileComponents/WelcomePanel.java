@@ -29,7 +29,7 @@ public class WelcomePanel extends JPanel {
 		JTextField txtWelcomeText;
 
 		txtWelcomeText = new JTextField();
-		txtWelcomeText.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtWelcomeText.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtWelcomeText.setEditable(false);
 		txtWelcomeText.setHorizontalAlignment(SwingConstants.CENTER);
 		txtWelcomeText.setText("Iter\u00E1ci\u00F3s m\u00F3dszerek implement\u00E1l\u00E1sa nagym\u00E9ret\u0171 ritka m\u00E1trixokra");
@@ -37,15 +37,15 @@ public class WelcomePanel extends JPanel {
 
 		BufferedImage myPicture = null;
 		try {
-			myPicture = ImageIO.read(new File("welcome.jpg"));
+			myPicture = ImageIO.read(new File("welcome.png"));
 		} catch (IOException e) {
 			System.err.println("nincsmeg");
 		}
 		JLabel picLabel = new JLabel(new ImageIcon(myPicture));
 
 		GroupLayout layout = new GroupLayout(this);
-		layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addGroup(layout.createParallelGroup(Alignment.LEADING).addComponent(txtWelcomeText, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE).addComponent(picLabel, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)).addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(Alignment.LEADING).addGroup(layout.createSequentialGroup().addGap(20).addComponent(txtWelcomeText, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE).addGap(10).addComponent(picLabel, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE).addContainerGap(24, Short.MAX_VALUE)));
+		layout.setHorizontalGroup(layout.createParallelGroup(Alignment.TRAILING).addGroup(layout.createSequentialGroup().addContainerGap().addGroup(layout.createParallelGroup(Alignment.TRAILING).addComponent(txtWelcomeText, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE).addComponent(picLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)).addContainerGap()));
+		layout.setVerticalGroup(layout.createParallelGroup(Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(txtWelcomeText, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE).addGap(10).addComponent(picLabel, GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE).addContainerGap()));
 
 		setLayout(layout);
 
