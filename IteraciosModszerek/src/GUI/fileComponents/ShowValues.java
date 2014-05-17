@@ -67,13 +67,13 @@ public class ShowValues extends JPanel {
 						.createSequentialGroup()
 						.addContainerGap()
 						.addGroup(
-								groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addComponent(lblBetltttMtrix, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE).addGap(10).addComponent(matrixArea, GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE))
-										.addGroup(groupLayout.createSequentialGroup().addComponent(lblXVektorok, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE).addGap(10).addComponent(xVectorsArea, GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE).addPreferredGap(ComponentPlacement.RELATED))
-										.addGroup(groupLayout.createSequentialGroup().addComponent(lblBVektor, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE).addGap(10).addComponent(bVectorArea, GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE).addPreferredGap(ComponentPlacement.RELATED))).addGap(10)));
+								groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addComponent(lblXVektorok, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE).addGap(10).addComponent(xVectorsArea, GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE))
+										.addGroup(groupLayout.createSequentialGroup().addComponent(lblBetltttMtrix, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(matrixArea, GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
+										.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addComponent(lblBVektor, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE).addGap(10).addComponent(bVectorArea, GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE))).addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
-				groupLayout.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGap(35).addComponent(lblBetltttMtrix, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)).addGroup(groupLayout.createSequentialGroup().addGap(30).addComponent(matrixArea, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGap(25).addComponent(lblXVektorok, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)).addGroup(groupLayout.createSequentialGroup().addGap(18).addComponent(xVectorsArea, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))).addGap(18)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(bVectorArea, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE).addComponent(lblBVektor, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)).addContainerGap(79, Short.MAX_VALUE)));
+				groupLayout.createSequentialGroup().addGap(30).addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(matrixArea, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE).addComponent(lblBetltttMtrix, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)).addGap(18)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(xVectorsArea, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE).addComponent(lblXVektorok, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)).addGap(18)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(bVectorArea, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE).addComponent(lblBVektor, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)).addContainerGap(94, Short.MAX_VALUE)));
 		setLayout(groupLayout);
 
 	}

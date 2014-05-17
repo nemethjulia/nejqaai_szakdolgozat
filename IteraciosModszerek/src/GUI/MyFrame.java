@@ -24,12 +24,15 @@ public class MyFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = -2122161377842820073L;
 
+	private static Manager manager;
+
 	public MyFrame() {
 		initComponents();
 	}
 
 	private void initComponents() {
 
+		manager = Manager.getInstance();
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Iter\u00E1ci\u00F3s M\u00F3dszerek");
 		setMinimumSize(new Dimension(1200, 700));
@@ -45,7 +48,7 @@ public class MyFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Manager.getInstance().restartProcess();
+				manager.restartProcess();
 				loadPanel(new WelcomePanel());
 			}
 		});
@@ -80,9 +83,9 @@ public class MyFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Manager.getInstance().generateTestData();
+				manager.generateTestData();
 
-				Manager.getInstance().showMessage("Tesztadatok betöltve!");
+				manager.showMessage("Tesztadatok betöltve!");
 			}
 		});
 		mnImport.add(mntmImportTestData);
@@ -92,7 +95,11 @@ public class MyFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				loadPanel(new ShowValues());
+				if (manager.getMatrix().getSize() < 100) {
+					loadPanel(new ShowValues());
+				} else {
+					manager.showMessage("Túl nagy a mátrix az adatok megjelenítéséhez!");
+				}
 			}
 		});
 		mnFile.add(mntmrtkekMegjelentse);
@@ -129,11 +136,8 @@ public class MyFrame extends JFrame {
 		});
 		mnMethods.add(mnTryMethods);
 
-		JMenu mnHelp = new JMenu("S\u00FAg\u00F3");
+		JMenuItem mnHelp = new JMenuItem("S\u00FAg\u00F3");
 		menuBar.add(mnHelp);
-
-		JMenuItem mntmOverview = new JMenuItem("\u00C1ttekint\u00E9s");
-		mnHelp.add(mntmOverview);
 
 		getContentPane().add(new WelcomePanel());
 

@@ -33,8 +33,8 @@ public class ImportFromFilePanel extends JPanel {
 	private JComboBox<String> comboBoxVectorStatus;
 	private JTextArea txtrDescription;
 
-	private String vectorDescription = "vector";
-	private String matrixDescription = "matrix";
+	private String vectorDescription = " Vektor megadása esetén az elsõ sorba a vektor méretét várja a program.\n A következõ sorokban az elemek sorának számát, majd vesszõvel elválasztva az elemek értékét kell írni.\n Fontos, hogy a fájl végén legyen egy üres sor.\n Például:\n 120\n 10,1.2\n 11,0.42\n";
+	private String matrixDescription = " Mátrix megadása esetén az elsõ sorba a mátrix méretét várja a program.\n A következõ sorokban az elemek sorának, oszlopának számát, majd az elemek értékét kell írni vesszõvel elválasztva.\n Fontos, hogy a fájl végén legyen egy üres sor.\n Például:\n 120\n 10,10,1.2\n 11,11,0.42\n";
 
 	private String lastPath = null;
 
@@ -121,7 +121,7 @@ public class ImportFromFilePanel extends JPanel {
 		});
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGap(160).addComponent(textAsking, GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE).addGap(160)).addGroup(groupLayout.createSequentialGroup().addGap(204).addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED, 237, Short.MAX_VALUE).addComponent(btnImport).addGap(238))
-				.addGroup(groupLayout.createSequentialGroup().addGap(174).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE).addContainerGap(646, Short.MAX_VALUE)).addGroup(groupLayout.createSequentialGroup().addGap(50).addComponent(txtrDescription, GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE).addGap(50)));
+				.addGroup(groupLayout.createSequentialGroup().addGap(174).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE).addContainerGap(646, Short.MAX_VALUE)).addGroup(groupLayout.createSequentialGroup().addGap(160).addComponent(txtrDescription, GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE).addGap(160)));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
 				groupLayout.createSequentialGroup().addGap(30).addComponent(textAsking, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE).addGap(18).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(btnImport)).addGap(22).addComponent(txtrDescription, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE).addContainerGap(39, Short.MAX_VALUE)));
