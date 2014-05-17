@@ -230,16 +230,6 @@ public class ImportEnteringValues extends JPanel {
 					}
 				} else if (comboBoxDataStructure.getSelectedIndex() == 1) {
 					MySparseMatrix matrix = (MySparseMatrix) newObject;
-					String msg = "Az alkalmazás a mátrix pozitív definitségét nem ellenõrzi!\n";
-					if (!matrix.isSymmetryc()) {
-						msg += "A mátrix nem szimmetrikus!\n";
-					}
-					if (!matrix.isDiagonalDominant()) {
-						msg += "A mátrix nem szigorúan diagonálisan domináns!\n";
-					}
-					msg += "Így a módszerek valószínûleg nem minden x0 vektorra fognak konvergálni.";
-
-					showMessage(msg);
 					Manager.getInstance().setMatrix(matrix);
 				}
 
@@ -310,7 +300,7 @@ public class ImportEnteringValues extends JPanel {
 			colField.setText("0");
 			valueField.setText("0");
 			rowField.requestFocus();
-		} catch (NumberFormatException exc) {
+		} catch (NumberFormatException | IndexOutOfBoundsException exc) {
 			showMessage("Nem megfelelõ érték!");
 		}
 	}

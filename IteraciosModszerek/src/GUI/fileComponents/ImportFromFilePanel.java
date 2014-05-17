@@ -120,12 +120,11 @@ public class ImportFromFilePanel extends JPanel {
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING, groupLayout.createSequentialGroup().addContainerGap().addComponent(txtrDescription, GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE).addContainerGap()).addGroup(groupLayout.createSequentialGroup().addGap(160).addComponent(textAsking, GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE).addGap(160))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup().addGap(204).addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED, 257, Short.MAX_VALUE).addComponent(btnImport).addGap(238))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup().addGap(174).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE).addContainerGap(646, Short.MAX_VALUE)));
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGap(160).addComponent(textAsking, GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE).addGap(160)).addGroup(groupLayout.createSequentialGroup().addGap(204).addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED, 237, Short.MAX_VALUE).addComponent(btnImport).addGap(238))
+				.addGroup(groupLayout.createSequentialGroup().addGap(174).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE).addContainerGap(646, Short.MAX_VALUE)).addGroup(groupLayout.createSequentialGroup().addGap(50).addComponent(txtrDescription, GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE).addGap(50)));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
 				groupLayout.createSequentialGroup().addGap(30).addComponent(textAsking, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE).addGap(18).addComponent(comboBoxDataStructure, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(btnImport)).addGap(11).addComponent(txtrDescription, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE).addContainerGap()));
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(comboBoxVectorStatus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(btnImport)).addGap(22).addComponent(txtrDescription, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE).addContainerGap(39, Short.MAX_VALUE)));
 		setLayout(groupLayout);
 	}
 

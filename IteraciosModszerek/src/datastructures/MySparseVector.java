@@ -116,7 +116,7 @@ public class MySparseVector {
 
 	}
 
-	public static MySparseVector readFromFile(BufferedReader reader) throws NumberFormatException, IOException {
+	public static MySparseVector readFromFile(BufferedReader reader) throws IndexOutOfBoundsException, NumberFormatException, IOException {
 		MySparseVector vector = null;
 
 		String line = reader.readLine();

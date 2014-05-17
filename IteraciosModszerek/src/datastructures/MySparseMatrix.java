@@ -184,24 +184,6 @@ public class MySparseMatrix {
 		return x;
 	}
 
-	/*
-	 * public MySparseMatrix add(MySparseMatrix otherMatrix) throws NotSameSize { MySparseMatrix result = this.clone();
-	 * 
-	 * if (size != otherMatrix.getSize()) { throw new NotSameSize("Nem ugyanakkora a két vektor!"); }
-	 * 
-	 * List<MatrixItem> otherData = otherMatrix.getData();
-	 * 
-	 * int thisI = 0; int otherI = 0; while (thisI < data.size() || otherI < otherData.size()) { MatrixItem thisItem = data.get(thisI); MatrixItem otherItem = otherData.get(otherI);
-	 * 
-	 * if (thisItem.getRow() == otherItem.getRow()) { if(thisItem) result.setValue(thisItem.getRow(), thisItem.getCol(), thisItem.getValue() + otherItem.getValue()); ++thisI; ++otherI; } else if (thisItem.getRow() > otherItem.getRow()) { result.setValue(otherItem.getRow(), otherItem.getCol(), otherItem.getValue()); ++otherI; } else if (thisItem.getRow() < otherItem.getRow()) {
-	 * result.setValue(thisItem.getRow(), thisItem.getCol(), thisItem.getValue()); ++thisI; }
-	 * 
-	 * if (thisI == data.size() && otherI != otherData.size()) { for (int i = otherI; i < otherData.size(); i++) { otherItem = otherData.get(i); result.setValue(otherItem.getRow(), otherItem.getCol(), otherItem.getValue()); } } else if (thisI != data.size() && otherI == otherData.size()) { for (int i = thisI; i < data.size(); i++) { thisItem = data.get(i); result.setValue(thisItem.getRow(),
-	 * thisItem.getCol(), thisItem.getValue()); } } }
-	 * 
-	 * return result; }
-	 */
-
 	public MySparseVector multiple(MySparseVector v) {
 		MySparseVector result = new MySparseVector(v.getSize());
 
