@@ -76,11 +76,11 @@ public class MethodResultPanel extends JPanel {
 
 	private void makePanel(MySparseVector x) {
 		xn = method.solve(a, b, x);
-		List<Double> resNorms = method.residumNorms;
+		List<Double> resNorms = method.residuumNorms;
 		List<Double> qs = method.qs;
 		qChartPanel = createChart(qs, "Tapasztalati kontrakciós együttható változása", "Iterációs lépés száma", "Együttható értéke", 3);
 		add(qChartPanel);
-		resChartPanel = createChart(resNorms, "Rezidumvektor normájának változása", "Iterációs lépés száma", "r normájának értéke", 0);
+		resChartPanel = createChart(resNorms, "Reziduumvektor normájának változása", "Iterációs lépés száma", "r normájának értéke", 0);
 		add(resChartPanel);
 
 		JPanel panel = new JPanel();

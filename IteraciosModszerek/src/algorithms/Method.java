@@ -10,7 +10,7 @@ public abstract class Method {
 
 	protected int numberOfSteps = 0;
 
-	public List<Double> residumNorms;
+	public List<Double> residuumNorms;
 	public List<Double> qs;
 	public int lastStepNumber;
 
@@ -20,12 +20,12 @@ public abstract class Method {
 
 	public MySparseVector solve(MySparseMatrix a, MySparseVector b, MySparseVector x0) {
 
-		residumNorms = new ArrayList<Double>();
+		residuumNorms = new ArrayList<Double>();
 		qs = new ArrayList<Double>();
 		List<MySparseVector> xns = new ArrayList<MySparseVector>();
 		MySparseVector x = x0.clone();
 		MySparseVector resVector = b.substract(a.multiple(x));
-		residumNorms.add(resVector.norm());
+		residuumNorms.add(resVector.norm());
 		xns.add(x);
 		int i = 0;
 		boolean needMoreStep = true;
@@ -34,7 +34,7 @@ public abstract class Method {
 			xns.add(x);
 
 			resVector = b.substract(a.multiple(x));
-			residumNorms.add(resVector.norm());
+			residuumNorms.add(resVector.norm());
 			if (i > 2) {
 				xns.remove(0);
 				double szamlalo = x.substract(xns.get(1)).norm();
