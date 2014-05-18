@@ -53,7 +53,7 @@ public class TestRead {
 			Assert.assertFalse(true);
 		}
 		Assert.assertNotNull(matrix);
-		Assert.assertEquals("4.0 0 0 0 \n0 4.0 0 0 \n0 0 4.0 3.0 \n0 0 3.0 4.0 \n", matrix.toString());
+		Assert.assertEquals("4.0 0 0 0 \n0 4.0 3.0 0 \n0 3.0 4.0 0 \n0 0 0 4.0 \n", matrix.toString());
 	}
 
 }

@@ -123,7 +123,7 @@ public class TestMethods {
 		try {
 			MySparseVector xnew = cg.solve(getMatrix(), getB(), getX0());
 
-			Assert.assertTrue(xnew.substract(getSolution()).norm() < 1);
+			Assert.assertTrue(xnew.substract(getSolution()).norm() < 2);
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
