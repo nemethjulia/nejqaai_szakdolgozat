@@ -8,7 +8,6 @@ IteraciosModszerek/manifest.mf
 IteraciosModszerek/bin/*
 IteraciosModszerek/doc/*
 IteraciosModszerek/nbproject/*
+IteraciosModszerek/src/~$cumentation.docx
 .idea/*
 newVector/*
-/IteraciosModszerek/nbproject/private/
-*.classpath
