@@ -11,3 +11,4 @@ IteraciosModszerek/nbproject/*
 .idea/*
 newVector/*
 /IteraciosModszerek/nbproject/private/
+*.classpath

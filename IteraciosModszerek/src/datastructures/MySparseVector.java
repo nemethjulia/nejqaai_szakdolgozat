@@ -255,7 +255,7 @@ public class MySparseVector {
 		double sum = 0;
 
 		for (VectorItem item : data) {
-			sum += item.getValue() * item.getValue();
+			sum += Math.abs(Math.pow(item.getValue(), 2)); // value^2
 		}
 
 		return Math.sqrt(sum);
