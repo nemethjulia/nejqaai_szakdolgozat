@@ -1,7 +1,13 @@
 .metadata/*
+IteraciosModszerek/.settings/*
+IteraciosModszerek/build.xml
+IteraciosModszerek/forms*
 IteraciosModszerek/IteraciosModszerek.eml
 IteraciosModszerek/IteraciosModszerek.iml
+IteraciosModszerek/manifest.mf
 IteraciosModszerek/bin/*
+IteraciosModszerek/doc/*
+IteraciosModszerek/nbproject/*
 .idea/*
-IteraciosModszerek/.settings/*
 newVector/*
+/IteraciosModszerek/nbproject/private/
