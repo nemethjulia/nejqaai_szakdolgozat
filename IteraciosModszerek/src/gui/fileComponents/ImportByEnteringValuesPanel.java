@@ -24,7 +24,7 @@ import javax.swing.SwingConstants;
 import datastructures.MySparseMatrix;
 import datastructures.MySparseVector;
 
-public class ImportEnteringValues extends JPanel {
+public class ImportByEnteringValuesPanel extends JPanel {
 
 	/**
 	 * Auto generated serialVersion UID
@@ -46,7 +46,7 @@ public class ImportEnteringValues extends JPanel {
 	private Object newObject;
 	private int size = 0;
 
-	public ImportEnteringValues() {
+	public ImportByEnteringValuesPanel() {
 		super();
 
 		JTextField textAsking = new JTextField();

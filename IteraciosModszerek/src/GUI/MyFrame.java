@@ -1,7 +1,7 @@
 package gui;
 
 import gui.fileComponents.ExportToFile;
-import gui.fileComponents.ImportEnteringValues;
+import gui.fileComponents.ImportByEnteringValuesPanel;
 import gui.fileComponents.ImportFromFilePanel;
 import gui.fileComponents.ShowValues;
 import gui.fileComponents.WelcomePanel;
@@ -62,7 +62,7 @@ public class MyFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				loadPanel(new ImportEnteringValues());
+				loadPanel(new ImportByEnteringValuesPanel());
 
 			}
 		});
