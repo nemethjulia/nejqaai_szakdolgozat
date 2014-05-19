@@ -112,6 +112,8 @@ public class MethodComponent extends JPanel {
 
 		JPanel panel = new JPanel();
 
+		JLabel lblKezdvektor = new JLabel("Kezd\u0151vektor: ");
+
 		GroupLayout gl_filterPanel = new GroupLayout(filterPanel);
 		gl_filterPanel.setHorizontalGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addGroup(
 				gl_filterPanel
@@ -127,14 +129,10 @@ public class MethodComponent extends JPanel {
 																gl_filterPanel
 																		.createParallelGroup(Alignment.LEADING)
 																		.addGroup(
-																				gl_filterPanel
-																						.createSequentialGroup()
-																						.addGap(50)
-																						.addGroup(
-																								gl_filterPanel.createParallelGroup(Alignment.LEADING, false).addComponent(x0ComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																										.addGroup(gl_filterPanel.createSequentialGroup().addComponent(stepNumber, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(stepNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))).addGap(78)
+																				gl_filterPanel.createSequentialGroup().addGap(46).addGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addComponent(stepNumber, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE).addComponent(lblKezdvektor, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)).addPreferredGap(ComponentPlacement.RELATED)
+																						.addGroup(gl_filterPanel.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING, gl_filterPanel.createSequentialGroup().addComponent(stepNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addGap(95)).addGroup(gl_filterPanel.createSequentialGroup().addComponent(x0ComboBox, 0, 180, Short.MAX_VALUE).addGap(8)))
 																						.addGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addComponent(boxGaussSeidel).addComponent(boxJacobi)).addGap(74).addGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addComponent(boxGradiens).addComponent(boxKonjugaltGradiens))).addGroup(gl_filterPanel.createSequentialGroup().addGap(220).addComponent(startProcessButton))).addGap(29)
-														.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))).addContainerGap(28, Short.MAX_VALUE)));
+														.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))).addContainerGap(21, Short.MAX_VALUE)));
 		gl_filterPanel.setVerticalGroup(gl_filterPanel.createParallelGroup(Alignment.LEADING).addGroup(
 				gl_filterPanel
 						.createSequentialGroup()
@@ -145,8 +143,9 @@ public class MethodComponent extends JPanel {
 								gl_filterPanel
 										.createParallelGroup(Alignment.LEADING)
 										.addGroup(
-												gl_filterPanel.createSequentialGroup().addGroup(gl_filterPanel.createParallelGroup(Alignment.BASELINE).addComponent(stepNumber, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addComponent(stepNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(boxJacobi).addComponent(boxGradiens)).addGap(18)
-														.addGroup(gl_filterPanel.createParallelGroup(Alignment.BASELINE).addComponent(x0ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(boxGaussSeidel).addComponent(boxKonjugaltGradiens)).addGap(18).addComponent(startProcessButton)).addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)).addContainerGap(36, Short.MAX_VALUE)));
+												gl_filterPanel.createSequentialGroup().addGroup(gl_filterPanel.createParallelGroup(Alignment.BASELINE).addComponent(boxJacobi).addComponent(boxGradiens).addComponent(stepNumber, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addComponent(stepNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)).addGap(18)
+														.addGroup(gl_filterPanel.createParallelGroup(Alignment.BASELINE).addComponent(boxGaussSeidel).addComponent(boxKonjugaltGradiens).addComponent(x0ComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addComponent(lblKezdvektor, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)).addGap(18).addComponent(startProcessButton))
+										.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)).addContainerGap(36, Short.MAX_VALUE)));
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
 		JTextArea txtrAProgramNem = new JTextArea();
