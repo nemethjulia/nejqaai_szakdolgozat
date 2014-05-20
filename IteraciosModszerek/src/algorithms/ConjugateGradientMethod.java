@@ -17,21 +17,24 @@ public class ConjugateGradientMethod extends Method {
 
 		MySparseVector xnew = null;
 
-		if (rm == null || vm == null) {
-			rm = b.clone();
+		rm = b.substract(m.multiple(x));
+		if (vm == null) {
 			vm = rm;
+		} else {
+			double beta = 0 - (vm.multiple(m.multiple(rm))) / (vm.multiple(m.multiple(vm)));
+			vm = rm.add(vm.multiple(beta));
 		}
 		double nevezo = vm.multiple(m.multiple(vm));
 		if (Double.isNaN(nevezo) || nevezo == 0.0) {
 			return x;
 		}
-		double alpha = vm.multiple(rm) / nevezo;
+		double alpha = rm.multiple(rm) / nevezo;
 
 		xnew = x.add(vm.multiple(alpha));
 
-		rm = rm.substract(m.multiple(vm).multiple(alpha));
-		double beta = vm.multiple(m.multiple(rm)) / vm.multiple(m.multiple(vm));
-		vm = rm.substract(vm.multiple(beta));
+		/*
+		 * MySparseVector rOld = rm.clone(); rm = rm.substract(m.multiple(vm).multiple(alpha)); double beta = rm.multiple(rm) / rOld.multiple(m.multiple(rOld)); vm = rm.add(vm.multiple(beta));
+		 */
 
 		return xnew;
 	}

@@ -44,9 +44,8 @@ public abstract class Method {
 				} else {
 					double q = szamlalo / nevezo;
 					qs.add(q);
-					if (i > 5 && q > 5) {
+					if (i > 5 && q > 1.5) {
 						needMoreStep = false;
-						lastStepNumber = i + 1;
 					}
 				}
 			}
