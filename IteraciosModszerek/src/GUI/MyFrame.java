@@ -136,15 +136,18 @@ public class MyFrame extends JFrame {
 		});
 		mnMethods.add(mnTryMethods);
 
-		JMenuItem mnHelp = new JMenuItem("S\u00FAg\u00F3");
-		mnHelp.addActionListener(new ActionListener() {
+		JMenu mnHelp = new JMenu("S\u00FAg\u00F3");
+		menuBar.add(mnHelp);
+
+		JMenuItem mnGiveHelp = new JMenuItem("Az alkalmazás súgója");
+		mnGiveHelp.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				loadPanel(new HelpPanel());
 			}
 		});
-		menuBar.add(mnHelp);
+		mnHelp.add(mnGiveHelp);
 
 		getContentPane().add(new WelcomePanel());
 
