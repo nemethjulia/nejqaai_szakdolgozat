@@ -36,12 +36,14 @@ public class WelcomePanel extends JPanel {
 		txtWelcomeText.setColumns(10);
 
 		BufferedImage myPicture = null;
+		JLabel picLabel = null;
 		try {
 			myPicture = ImageIO.read(new File("welcome.png"));
+			picLabel = new JLabel(new ImageIcon(myPicture));
 		} catch (IOException e) {
-			System.err.println("nincsmeg");
+			picLabel = new JLabel("Nem elérhetõ a panelhez rendelt kép!");
 		}
-		JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+		picLabel.setHorizontalAlignment(0);
 
 		GroupLayout layout = new GroupLayout(this);
 		layout.setHorizontalGroup(layout.createParallelGroup(Alignment.TRAILING).addGroup(layout.createSequentialGroup().addContainerGap().addGroup(layout.createParallelGroup(Alignment.TRAILING).addComponent(txtWelcomeText, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE).addComponent(picLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)).addContainerGap()));
