@@ -128,7 +128,7 @@ public class MySparseVector {
 				if (arr.length == 2) {
 					vector.setValue(Integer.parseInt(arr[0]) - 1, Double.parseDouble(arr[1]));
 				} else {
-					return vector;
+					throw new IOException();
 				}
 				line = reader.readLine();
 			}

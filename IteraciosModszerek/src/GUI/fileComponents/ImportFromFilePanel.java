@@ -33,8 +33,8 @@ public class ImportFromFilePanel extends JPanel {
 	private JComboBox<String> comboBoxVectorStatus;
 	private JTextArea txtrDescription;
 
-	private String vectorDescription = " Vektor megadása esetén az elsõ sorba a vektor méretét várja a program.\n A következõ sorokban az elemek sorának számát, majd vesszõvel elválasztva az elemek értékét kell írni.\n Fontos, hogy a fájl végén legyen egy üres sor.\n Például:\n 120\n 10,1.2\n 11,0.42\n";
-	private String matrixDescription = " Mátrix megadása esetén az elsõ sorba a mátrix méretét várja a program.\n A következõ sorokban az elemek sorának, oszlopának számát, majd az elemek értékét kell írni vesszõvel elválasztva.\n Fontos, hogy a fájl végén legyen egy üres sor.\n Például:\n 120\n 10,10,1.2\n 11,11,0.42\n";
+	private String vectorDescription = " Vektor megadása esetén az elsõ sorba a vektor méretét várja a program.\n A következõ sorokban az elemek sorának számát, majd vesszõvel elválasztva az elemek értékét kell írni.\n Például:\n 120\n 10,1.2\n 11,0.42\n";
+	private String matrixDescription = " Mátrix megadása esetén az elsõ sorba a mátrix méretét várja a program.\n A következõ sorokban az elemek sorának, oszlopának számát, majd az elemek értékét kell írni vesszõvel elválasztva.\n Például:\n 120\n 10,10,1.2\n 11,11,0.42\n";
 
 	private String lastPath = null;
 
@@ -77,7 +77,7 @@ public class ImportFromFilePanel extends JPanel {
 						try {
 							vector = MySparseVector.readFromFile(chooser.getSelectedFile());
 						} catch (NumberFormatException | IOException e) {
-							showMessage("Hiba a Fájlok beolvasásában!");
+							showMessage("Hiba a fájl beolvasásában!");
 						}
 						if (vector != null) {
 							if (comboBoxVectorStatus.getSelectedIndex() == 0) {
@@ -91,7 +91,7 @@ public class ImportFromFilePanel extends JPanel {
 						try {
 							matrix = MySparseMatrix.readFromFile(chooser.getSelectedFile());
 						} catch (NumberFormatException | IOException e) {
-							showMessage("Hiba a Fájlok beolvasásában!");
+							showMessage("Hiba a fájl beolvasásában!");
 						}
 						if (matrix != null) {
 							Manager.getInstance().setMatrix(matrix);

@@ -287,19 +287,23 @@ public class ImportByEnteringValuesPanel extends JPanel {
 	private void valueFieldChanged() {
 		try {
 			double value = Double.parseDouble(valueField.getText());
-			int row = Integer.parseInt(rowField.getText());
+			if (value != 0) {
+				int row = Integer.parseInt(rowField.getText());
 
-			if (comboBoxDataStructure.getSelectedIndex() == 1) {
-				int col = Integer.parseInt(colField.getText());
-				((MySparseMatrix) newObject).setValue(row - 1, col - 1, value);
-			} else if (comboBoxDataStructure.getSelectedIndex() == 0) {
-				((MySparseVector) newObject).setValue(row - 1, value);
+				if (comboBoxDataStructure.getSelectedIndex() == 1) {
+					int col = Integer.parseInt(colField.getText());
+					((MySparseMatrix) newObject).setValue(row - 1, col - 1, value);
+				} else if (comboBoxDataStructure.getSelectedIndex() == 0) {
+					((MySparseVector) newObject).setValue(row - 1, value);
+				}
+
+				rowField.setText("0");
+				colField.setText("0");
+				valueField.setText("0");
+				rowField.requestFocus();
+			} else {
+				showMessage("A program nem menti a nulla értékû elemeket.");
 			}
-
-			rowField.setText("0");
-			colField.setText("0");
-			valueField.setText("0");
-			rowField.requestFocus();
 		} catch (NumberFormatException | IndexOutOfBoundsException exc) {
 			showMessage("Nem megfelelõ érték!");
 		}
@@ -335,6 +339,8 @@ public class ImportByEnteringValuesPanel extends JPanel {
 				} else if (comboBoxDataStructure.getSelectedIndex() == 1) {
 					newObject = new MySparseMatrix(size);
 				}
+			} else {
+				showMessage("Nem megfelelõ érték!");
 			}
 		} catch (NumberFormatException exc) {
 			showMessage("Nem megfelelõ érték!");

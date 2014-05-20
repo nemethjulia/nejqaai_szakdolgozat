@@ -7,6 +7,7 @@ import gui.fileComponents.showDataStructures.VectorJustDataComponent;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -68,6 +69,7 @@ public class MethodResultPanel extends JPanel {
 		this.a = a;
 		this.b = b;
 		stepNumberField = new JTextField();
+		stepNumberField.setEditable(false);
 		stepNumberField.setText(String.valueOf(0));
 
 		makePanel(x);
@@ -223,7 +225,13 @@ public class MethodResultPanel extends JPanel {
 		int returnVal = chooser.showSaveDialog(getParent());
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			try {
-				ChartUtilities.saveChartAsJPEG(chooser.getSelectedFile(), chart, 1200, 1200);
+				File selectedFile = chooser.getSelectedFile();
+				String fileName = selectedFile.getAbsolutePath();
+				if (!(fileName.endsWith("jpeg") || fileName.endsWith("JPEG") || fileName.endsWith("jpg") || fileName.endsWith("JPG"))) {
+					fileName += ".jpeg";
+					selectedFile = new File(fileName);
+				}
+				ChartUtilities.saveChartAsJPEG(selectedFile, chart, 1200, 1200);
 			} catch (IOException e) {
 				Manager.getInstance().showMessage("Hiba a Fájl írása közben!");
 				e.printStackTrace();

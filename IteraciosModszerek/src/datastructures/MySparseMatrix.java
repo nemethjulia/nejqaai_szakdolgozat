@@ -219,7 +219,7 @@ public class MySparseMatrix {
 				if (arr.length == 3) {
 					matrix.setValue(Integer.parseInt(arr[0]) - 1, Integer.parseInt(arr[1]) - 1, Double.parseDouble(arr[2]));
 				} else {
-					return matrix;
+					throw new IOException();
 				}
 				line = reader.readLine();
 			}
