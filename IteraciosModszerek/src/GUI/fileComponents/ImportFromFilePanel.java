@@ -36,8 +36,6 @@ public class ImportFromFilePanel extends JPanel {
 	private String vectorDescription = " Vektor megadása esetén az elsõ sorba a vektor méretét várja a program.\n A következõ sorokban az elemek sorának számát, majd vesszõvel elválasztva az elemek értékét kell írni.\n Például:\n 120\n 10,1.2\n 11,0.42\n";
 	private String matrixDescription = " Mátrix megadása esetén az elsõ sorba a mátrix méretét várja a program.\n A következõ sorokban az elemek sorának, oszlopának számát, majd az elemek értékét kell írni vesszõvel elválasztva.\n Például:\n 120\n 10,10,1.2\n 11,11,0.42\n";
 
-	private String lastPath = null;
-
 	public ImportFromFilePanel() {
 		setBorder(null);
 
@@ -63,6 +61,7 @@ public class ImportFromFilePanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				JFileChooser chooser;
+				String lastPath = Manager.getInstance().getLastPath();
 				if (lastPath != null) {
 					chooser = new JFileChooser(lastPath);
 				} else {
@@ -97,7 +96,7 @@ public class ImportFromFilePanel extends JPanel {
 							Manager.getInstance().setMatrix(matrix);
 						}
 					}
-					lastPath = chooser.getSelectedFile().getAbsolutePath();
+					Manager.getInstance().setLastPath(chooser.getSelectedFile().getAbsolutePath());
 				}
 			}
 

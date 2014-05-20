@@ -31,6 +31,8 @@ public class Manager {
 		bVector = new MySparseVector(0);
 	}
 
+	private String lastPath = null;
+
 	private MyFrame frame;
 
 	private MySparseMatrix matrix;
@@ -75,10 +77,10 @@ public class Manager {
 
 	public void generateTestData() {
 		try {
-			matrix = MySparseMatrix.readFromFile(new File("src/test/01/01.matrix.txt"));
-			bVector = MySparseVector.readFromFile(new File("src/test/01/01bvector.txt"));
-			xVectors.add(MySparseVector.readFromFile(new File("src/test/01/01x01vector.txt")));
-			xVectors.add(MySparseVector.readFromFile(new File("src/test/01/01x02vector.txt")));
+			matrix = MySparseMatrix.readFromFile(new File("test/01/01.matrix.txt"));
+			bVector = MySparseVector.readFromFile(new File("test/01/01bvector.txt"));
+			xVectors.add(MySparseVector.readFromFile(new File("test/01/01x01vector.txt")));
+			xVectors.add(MySparseVector.readFromFile(new File("test/01/01x02vector.txt")));
 		} catch (NumberFormatException | IOException e) {
 			showMessage("Hiba a Fájlok beolvasásában!");
 		}
@@ -111,6 +113,14 @@ public class Manager {
 			return false;
 		}
 		return true;
+	}
+
+	public String getLastPath() {
+		return lastPath;
+	}
+
+	public void setLastPath(String lastPath) {
+		this.lastPath = lastPath;
 	}
 
 }

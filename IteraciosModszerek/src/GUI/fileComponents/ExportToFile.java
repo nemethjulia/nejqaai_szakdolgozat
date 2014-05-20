@@ -85,7 +85,13 @@ public class ExportToFile extends JPanel {
 				}
 
 				if (letsSave) {
-					JFileChooser chooser = new JFileChooser();
+					JFileChooser chooser;
+					String lastPath = Manager.getInstance().getLastPath();
+					if (lastPath != null) {
+						chooser = new JFileChooser(lastPath);
+					} else {
+						chooser = new JFileChooser();
+					}
 					FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT", "txt");
 					chooser.setFileFilter(filter);
 					int returnVal = chooser.showSaveDialog(getParent());
@@ -96,6 +102,7 @@ public class ExportToFile extends JPanel {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
+						Manager.getInstance().setLastPath(chooser.getSelectedFile().getAbsolutePath());
 					}
 				}
 			}

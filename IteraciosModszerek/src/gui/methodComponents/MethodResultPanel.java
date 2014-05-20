@@ -196,7 +196,13 @@ public class MethodResultPanel extends JPanel {
 	}
 
 	private void saveXnVector() {
-		JFileChooser chooser = new JFileChooser();
+		JFileChooser chooser;
+		String lastPath = Manager.getInstance().getLastPath();
+		if (lastPath != null) {
+			chooser = new JFileChooser(lastPath);
+		} else {
+			chooser = new JFileChooser();
+		}
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT", "txt");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showSaveDialog(getParent());
@@ -208,6 +214,7 @@ public class MethodResultPanel extends JPanel {
 				Manager.getInstance().showMessage("Hiba a Fájl írása közben!");
 				e.printStackTrace();
 			}
+			Manager.getInstance().setLastPath(chooser.getSelectedFile().getAbsolutePath());
 		}
 	}
 
@@ -219,7 +226,13 @@ public class MethodResultPanel extends JPanel {
 	}
 
 	private void savePicture(JFreeChart chart) {
-		JFileChooser chooser = new JFileChooser();
+		JFileChooser chooser;
+		String lastPath = Manager.getInstance().getLastPath();
+		if (lastPath != null) {
+			chooser = new JFileChooser(lastPath);
+		} else {
+			chooser = new JFileChooser();
+		}
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPEG", "jpeg");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showSaveDialog(getParent());
@@ -232,6 +245,7 @@ public class MethodResultPanel extends JPanel {
 					selectedFile = new File(fileName);
 				}
 				ChartUtilities.saveChartAsJPEG(selectedFile, chart, 1200, 1200);
+				Manager.getInstance().setLastPath(chooser.getSelectedFile().getAbsolutePath());
 			} catch (IOException e) {
 				Manager.getInstance().showMessage("Hiba a Fájl írása közben!");
 				e.printStackTrace();
@@ -246,7 +260,13 @@ public class MethodResultPanel extends JPanel {
 		for (int i = 0; i < doubles.size(); ++i) {
 			dataToFile += categoryAxisLabel + ": " + String.valueOf(i + firstStep) + "; " + valueAxisLabel + ": " + doubles.get(i) + "\n";
 		}
-		JFileChooser chooser = new JFileChooser();
+		JFileChooser chooser;
+		String lastPath = Manager.getInstance().getLastPath();
+		if (lastPath != null) {
+			chooser = new JFileChooser(lastPath);
+		} else {
+			chooser = new JFileChooser();
+		}
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT", "txt");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showSaveDialog(getParent());
@@ -258,6 +278,7 @@ public class MethodResultPanel extends JPanel {
 				Manager.getInstance().showMessage("Hiba a Fájl írása közben!");
 				e.printStackTrace();
 			}
+			Manager.getInstance().setLastPath(chooser.getSelectedFile().getAbsolutePath());
 		}
 	}
 }
