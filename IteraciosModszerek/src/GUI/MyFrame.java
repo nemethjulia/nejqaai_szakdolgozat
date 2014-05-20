@@ -137,6 +137,13 @@ public class MyFrame extends JFrame {
 		mnMethods.add(mnTryMethods);
 
 		JMenuItem mnHelp = new JMenuItem("S\u00FAg\u00F3");
+		mnHelp.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				loadPanel(new HelpPanel());
+			}
+		});
 		menuBar.add(mnHelp);
 
 		getContentPane().add(new WelcomePanel());
